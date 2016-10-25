@@ -3,3 +3,60 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
+class Train(models.Model):
+    train_id = models.CharField(max_length=5, primary_key=True)
+    train_type = models.CharField(max_length=1)
+    num_station = models.IntegerField(default=-1)
+    distance = models.FloatField(default=-1)
+
+    def __str__(self):
+        return self.train_id
+
+class Station(models.Model):
+    station_id = models.IntegerField(default = -1)
+    station_name = models.CharField(max_length=20)
+    station_city = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.station_name
+
+
+class Run(models.Model):
+    @staticmethod
+    def generateRunKey(station_id, train_id):
+        run_key = '{:X<5}'.format(train_id) + '{:0>5}'.format(station_id)
+        return run_key
+
+    run_key = models.CharField(max_length=30, primary_key=True) 
+    station_name = models.ForeignKey(Station, on_delete=models.CASCADE)
+    train_come_by = models.ForeignKey(Train, on_delete=models.CASCADE)
+    order_of_station = models.IntegerField(default = -1)
+    arrive_time = models.CharField(max_length = 10)
+    distance_count = models.FloatField(default = -1)
+    count_over_night = models.IntegerField(default = -1)
+
+    def __str__(self):
+        return self.station_name
+
+
+class Seat(models.Model):
+    @staticmethod
+    def generateSeatKey(date, train_id, carriage_id, seat_id):
+        seat_key = '{:X<5}'.format(train_id) \
+                + date.strftime("%Y%m%d") \
+                + '{:0>2}'.format(carriage_id)\
+                + '{:0>3}'.format(seat_id)
+        return seat_key
+    
+    seat_key = models.CharField(max_length=30, primary_key=True)
+    train_id = models.ForeignKey(Train, on_delete=models.CASCADE)
+    carriage_id = models.IntegerField(default=-1)
+    seat_id = models.IntegerField(default = -1)
+    seat_type = models.CharField(max_length=10)
+    date = models.DateField()
+    status = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.seat_type + '\t' \
+                + str(self.carriage_id) + '\t' \
+                + str(self.seat_id)
