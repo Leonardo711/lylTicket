@@ -1,23 +1,24 @@
+#-*- coding:utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db import models
 
 # Create your models here.
 class Train(models.Model):
-    train_id = models.CharField(max_length=5, primary_key=True)
-    train_type = models.CharField(max_length=1)
-    num_station = models.IntegerField(default=-1)
-    distance = models.FloatField(default=-1)
+    train_id = models.CharField('列车编号',max_length=5, primary_key=True)
+    train_type = models.CharField('列车类型',max_length=1)
+    num_station = models.IntegerField('总站点数',default=-1)
+    distance = models.FloatField('总里程数')
 
     def __str__(self):
         return self.train_id
 
 class Station(models.Model):
     station_id = models.IntegerField(default = -1)
-    station_name = models.CharField(max_length=20)
-    station_city = models.CharField(max_length=20)
+    station_name = models.CharField("途经车站", max_length=20)
+    station_city = models.CharField("所属城市", max_length=20)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.station_name
 
 
@@ -31,8 +32,8 @@ class Run(models.Model):
     station_name = models.ForeignKey(Station, on_delete=models.CASCADE)
     train_come_by = models.ForeignKey(Train, on_delete=models.CASCADE)
     order_of_station = models.IntegerField(default = -1)
-    arrive_time = models.CharField(max_length = 10)
-    distance_count = models.FloatField(default = -1)
+    arrive_time = models.CharField("到站时间", max_length = 10)
+    distance_count = models.FloatField("里程数")
     count_over_night = models.IntegerField(default = -1)
 
     def __str__(self):
