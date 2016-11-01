@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}列车表{% endblock %}
+{% block content %}
+<div class="container">
+	{% for obj in object_list %}
+	<div class="row">
+		<div class="col-xs-8"> {{ obj.train_id }}</div>
+		<div class="col-xs-4">
+			<a href="train/{{ obj.train_id }}" class="button" target="_self"> 查看详情 &nbsp;</a>
+			<a href="/todolist/update/{{ obj.train_id }}" class="button" target="_self">&nbsp;修改信息 &nbsp;</a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
+

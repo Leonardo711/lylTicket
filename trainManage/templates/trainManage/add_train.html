@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Bootstrap</title>
+		<title>添加车次</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<!-- Bootstrap -->
@@ -28,6 +28,10 @@
 								<td> {{ form.station_name }} </td>
 								<td> {{ form.arrive_time }} </td>
 								<td> {{ form.distance_count }}</td>
+								{% if formset.can_delete %}
+								<li> {{ form.DELETE }}</li>
+								{% endif %}
+
 							</tr>
 							{% endfor %}
 						</tbody>

@@ -31,7 +31,7 @@ class Run(models.Model):
     run_key = models.CharField(max_length=30, primary_key=True) 
     station_name = models.ForeignKey(Station, on_delete=models.CASCADE)
     train_come_by = models.ForeignKey(Train, on_delete=models.CASCADE)
-    order_of_station = models.IntegerField(default = -1)
+    order_of_station = models.IntegerField(default = 1)
     arrive_time = models.CharField("到站时间", max_length = 10)
     distance_count = models.FloatField("里程数")
     count_over_night = models.IntegerField(default = -1)

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}添加车次{% endblock %}
+{% block content %}
+<div class="container">
+	<form method="post">{% csrf_token %}
+		<div class="">
+			<p>{{form.train_id.label_tag}}{{form.train_id}}{{form.train_id.errors}}</p>
+			<p><a href="/trainManage/" target="_self" class="button">返回列表</a></p>
+			<input type="submit" value="提交" />
+		</div>
+		<div>
+			{{ item_form.management_form }}
+			{{ item_form.non_form_erros }}
+			<br/><br/><hr/>
+			<b>途经车站：</b><br/>
+			{% for form in item_form %}
+			<div class="item">
+				<p>{{ form.order_station }}</p>
+				<p style="display:none">{{form.DELETE}}</p>
+				<p>{{form.staion_name.label_tag}}</p>
+				<p>{{form.station_name}}</p>
+				<p>{{form.station_name.errors}}</p>
+				<p>{{form.arrive_time.label_tag}}</p>
+				<p>{{form.arrive_time}}</p>
+				<p>{{form.arrive_time.errors}}</p>
+				<p>{{form.distance_count.label_tag}}</p>
+				<p>{{form.distance_count}}</p>
+				<p>{{form.distance_count.errors}}</p>
+{% endblock %}
