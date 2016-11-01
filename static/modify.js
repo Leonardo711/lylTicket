@@ -10,11 +10,11 @@ $(document).ready(function(){
     }
 
     function deleteForm(btn, prefix) {
-        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+		var forms = $('.item'); // Get all the forms
+		var formCount = forms.length;
         if (formCount > 1) {
             // Delete the item/form
             $(btn).parents('.item').remove();
-            var forms = $('.item'); // Get all the forms
             // Update the total number of forms (1 less than before)
             $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
             var i = 0;
@@ -32,14 +32,14 @@ $(document).ready(function(){
     }
 
     function addForm(btn, prefix) {
-        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+		var forms = $('.item'); // Get all the forms
+		var formCount = forms.length;
         // You can only submit a maximum of 10 station for a train.
         if (formCount < 10) {
             var row = $(".item:last").clone(false).get(0);
             // Insert it after the last form
 			tmp = parseInt($(row).find("[readonly=readonly]").val());
-			$(row).find("[readonly=readonly]").val(tmp+1)
-
+			$(row).find("[readonly=readonly]").val(tmp+1);
             $(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
 
             $(row).children().children().each(function () {
