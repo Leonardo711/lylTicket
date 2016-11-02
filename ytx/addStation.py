@@ -2,48 +2,10 @@
 import os
 import sys
 import django
-#import ticket2016.settings
-#from adduser.models import User, Passenger, User_Passenger, Price, Station
-from trainManage.models import *
+from ..trainManage import *
 import train
 import pinyin
-'''
-def addUser(user_name,password,email_address):
-    usr = User(user_name=user_name,
-                password=password,
-                email_address=email_address)
-    usr.save()
 
-def addPassenger(passenger_name,passenger_id,student):
-    psg = Passenger(passenger_name=passenger_name,
-                passenger_id=passenger_id,
-                student=student)
-    psg.save()
-
-def deleteUser(user_name):
-    usr = User.objects.get(user_name=user_name)
-    usr.delete()
-
-def deletePassenger(passenger_id):
-    psg = Passenger.objects.get(passenger_id=passenger_id)
-    psg.delete()
-
-def addUser_Passenger(user,passenger):
-    u_p = User_Passenger(user,passenger)
-    u_p.save()
-
-def deleteUser_Passenger(user_name,passenger_id):
-    u_p = User_Passenger.objects.get(user_name=user_name,passenger_id=passenger_id)
-    u_p.delete()
-
-
-def addPrice(train_type,seat_type,ratio_student,price_per_km):
-    price = Price(train_type=train_type,
-                seat_type=seat_type,
-                ratio_student=ratio_student,
-                price_per_km=price_per_km)
-    price.save()
-'''
 def addStation(station_id,station_name,station_city):
     station = Station(station_id=station_id,
                     station_name=station_name,
