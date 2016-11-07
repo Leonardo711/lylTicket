@@ -27,6 +27,51 @@ class train_create(CreateView):
         run_form = RunForm_stationSet()
         return self.render_to_response(self.get_context_data(form=form, item_form=run_form))
 
+    def post(self, request, *args, **kwargs):
+        self.object=None
+        form_class = self.get_form_class()
+        form =self.get_form(form_class)
+        run_form = RunForm_stationSet(self.request.POST)
+        if (form.is_valid() and run_form.is_valid()):
+            num_station = run_form.total_form_count()
+            train = form.save(commit=False)
+            self.object=train
+            train.num_station = num_station
+
+          #  day_count = 0
+          #  runCount = -1
+          #  time_list = []
+            distance_list = [9]
+            print(distance_list)
+          #  for runForm in run_form:
+          #      runCount += 1
+          #      run = runForm.save(commit=False)
+          #      arrive_time = datetime.strptime(run.arrive_time, "%H:%M")
+          #      time_list.append(arrive_time)
+          #      if(runCount != 0):
+          #          pre_arrive = time_list[runCount -1]
+          #          if arrive_time < pre_arrive:
+          #              day_count += 1
+          #      station = Station.objects.get(station_name = run.station_name)
+          #      run.station_name = station
+          #      distance_list.append(run.distance_count)
+          #      run.count_over_night = day_count
+          #      run.run_key = Run(station.station_id, train.train_id)
+          #      run.order_station = runCount 
+          #      run.train_come_by = train
+          #      print(run.count_over_night)
+          #      print(run.run_key)
+          #      print(run.order_station)
+          #      run.save()
+            train.train_type = train.train_id[0]
+            train.distance = distance_list[-1]
+            train.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(
+                    self.get_context_data(form=form,
+                        run_form=run_form))
+
 
 #
 #def add_train(request):

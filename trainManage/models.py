@@ -6,9 +6,9 @@ from django.db import models
 # Create your models here.
 class Train(models.Model):
     train_id = models.CharField('列车编号',max_length=5, primary_key=True)
-    train_type = models.CharField('列车类型',max_length=1)
-    num_station = models.IntegerField('总站点数',default=-1)
-    distance = models.FloatField('总里程数')
+    train_type = models.CharField('列车类型',max_length=1, default="K")
+    num_station = models.IntegerField('总站点数',default=0)
+    distance = models.FloatField('总里程数', default=0)
 
     def __str__(self):
         return self.train_id
