@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}车次详情 {% endblock %}
+{% block content %}
+<a href="/trainManage/" target="_self" class="button">返回列表</a>
+<hr>
+   {{ train.train_id }} 总站点数:{{train.num_station}}
+</hr>
+   <br><b>途径车站列表:</b><br>
+    <table class = "table table-hover">
+        <thead>
+        <tr>
+            <th> 序号 </th>
+            <th> 车站名 </th>
+            <th> 到站时间 </th>
+            <th> 里程数 </th>
+        </tr>
+        </thead>
+        {% for form in train.run_set.all %}
+        <tbody class="item">
+        <tr>
+            <td> {{form.order_of_station}}</td>
+            <td> {{form.station_name}} </td>
+            <td> {{form.arrive_time}} </td>
+            <td> {{form.distance_count}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

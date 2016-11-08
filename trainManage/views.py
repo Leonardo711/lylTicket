@@ -75,4 +75,8 @@ class train_create(CreateView):
                         item_form=run_form))
 
 
+class train_detail(DetailView):
+    model = Train
+    template_name = "train_detail.html"
+    context_object_name = "train"
 

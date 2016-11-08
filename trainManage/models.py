@@ -13,10 +13,16 @@ class Train(models.Model):
     def __str__(self):
         return self.train_id
 
+    def __unicode__(self):
+        return self.train_id
+
 class Station(models.Model):
     station_id = models.IntegerField(default = -1)
     station_name = models.CharField("途经车站", max_length=20)
     station_city = models.CharField("所属城市", max_length=20)
+
+    def __str__(self):
+        return self.station_name
 
     def __unicode__(self):
         return self.station_name
@@ -39,6 +45,11 @@ class Run(models.Model):
     def __str__(self):
         return self.station_name
 
+    def __unicode__(self):
+        return self.run_key
+
+    class Meta:
+        ordering = ["train_come_by", "order_of_station"]
 
 class Seat(models.Model):
     @staticmethod
@@ -61,3 +72,8 @@ class Seat(models.Model):
         return self.seat_type + '\t' \
                 + str(self.carriage_id) + '\t' \
                 + str(self.seat_id)
+
+    def __unicode__(self):
+        return self.seat_type + '\t' \
+               + str(self.carriage_id) + '\t' \
+               + str(self.seat_id)
