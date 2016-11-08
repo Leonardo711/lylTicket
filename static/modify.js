@@ -17,11 +17,13 @@ $(document).ready(function(){
             $(btn).parents('.item').remove();
             // Update the total number of forms (1 less than before)
             $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-            var i = 0;
             // Go through the forms and set their indices, names and IDs
-            for (formCount = forms.length; i < formCount; i++) {
-                $(forms.get(i)).children().children().each(function () {
-                    if ($(this).get(0).tagName == 'INPUT' ) updateElementIndex(this, prefix, i);
+            forms = $(".item");
+            formCount = forms.length;
+            for (var i=0; i < formCount; i++) {
+                $(forms.get(i)).find("[readonly=readonly]").val(i+1);
+                $(forms.get(i)).children().children().children().each(function () {
+                    updateElementIndex(this, prefix, i);
                 });
             }
         } // End if
@@ -42,9 +44,12 @@ $(document).ready(function(){
 			$(row).find("[readonly=readonly]").val(tmp+1);
             $(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
 
-            $(row).children().children().each(function () {
+            $(row).children().children().children().each(function () {
                 updateElementIndex(this, prefix, formCount);
                 $(this).val("");
+                if ($(this).attr("readonly")=="readonly"){
+                    $(this).val(formCount+1);
+                }
             });
 
             // Add an event handler for the delete item/form link

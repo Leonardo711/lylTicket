@@ -12,9 +12,7 @@
 			{{ item_form.non_form_erros }}
 			<br/><br/><hr/>
 			<b>途经车站：</b><br/>
-			{% for form in item_form %}
 			<div class="station">
-				<p style="display:none">{{form.DELETE}}</p>
 				<table class = "table table-hover">
 					<thead>
 						<tr>
@@ -24,7 +22,9 @@
 							<th> 里程数 </th>
 						</tr>
 					</thead>
-					<tbody class="item">	
+					{% for form in item_form %}
+					<p style="display:none">{{form.DELETE}}</p>
+					<tbody class="item">
 						<tr>
 							<td> {{form.order_of_station}}</td>
 							<td> {{form.station_name}} </td>
