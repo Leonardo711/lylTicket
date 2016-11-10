@@ -26,4 +26,23 @@
         {% endfor %}
         </tbody>
     </table>
+    <br><b>座次信息:</b><br>
+    <table class = "table table-hover">
+        <thead>
+        <tr>
+            <th> 车厢号 </th>
+            <th> 座位总数 </th>
+            <th> 座次类型 </th>
+        </tr>
+        </thead>
+        <a href="/trainManage/addCarriage/{{train.train_id}}" type="button">添加座位</a>
+        {% for form in train.carriage_set.all %}
+        <tbody class="item">
+        <tr>
+            <td> {{form.carriage_id}}</td>
+            <td> {{form.num_seat}}</td>
+            <td> {{form.seat_type}}</td>
+        </tr>
+        {% endfor %}
+</table>
 {% endblock %}

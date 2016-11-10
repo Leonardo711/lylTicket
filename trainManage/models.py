@@ -51,29 +51,46 @@ class Run(models.Model):
     class Meta:
         ordering = ["train_come_by", "order_of_station"]
 
+class Carriage(models.Model):
+    @staticmethod
+    def generateCarriageKey(train_id, carriage_id):
+        carriage_key = '{:X<5}'.format(train_id) \
+                   + '{:0>2}'.format(carriage_id)
+        return carriage_key
+    carriage_key = models.CharField(max_length=30, primary_key = True)
+    train_id = models.ForeignKey(Train, on_delete=models.CASCADE)
+    carriage_id = models.IntegerField(default=1)
+    num_seat = models.IntegerField(default=0)
+    seat_type = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.carriage_key
+
+    def __unicode__(self):
+        return self.carriage_key
+
+
+
 class Seat(models.Model):
     @staticmethod
-    def generateSeatKey(date, train_id, carriage_id, seat_id):
-        seat_key = '{:X<5}'.format(train_id) \
+    def generateSeatRunKey(date, carriage_key, seat_id):
+        seat_key = carriage_key \
                 + date.strftime("%Y%m%d") \
-                + '{:0>2}'.format(carriage_id)\
                 + '{:0>3}'.format(seat_id)
         return seat_key
     
     seat_key = models.CharField(max_length=30, primary_key=True)
-    train_id = models.ForeignKey(Train, on_delete=models.CASCADE)
-    carriage_id = models.IntegerField(default=-1)
-    seat_id = models.IntegerField(default = -1)
-    seat_type = models.CharField(max_length=10)
+    carriage = models.ForeignKey(Carriage, on_delete=models.CASCADE)
+    seat_id = models.IntegerField()
     date = models.DateField()
     status = models.CharField(max_length=100)
     
     def __str__(self):
-        return self.seat_type + '\t' \
-                + str(self.carriage_id) + '\t' \
-                + str(self.seat_id)
+        return str(self.carriage.carriage_id) + '\t' \
+               + str(self.seat_id)
 
     def __unicode__(self):
-        return self.seat_type + '\t' \
-               + str(self.carriage_id) + '\t' \
+        return str(self.carriage.carriage_id) + '\t' \
                + str(self.seat_id)
+    class Meta:
+        ordering = ["seat_key", "date"]

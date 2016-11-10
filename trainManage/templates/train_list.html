@@ -6,11 +6,12 @@
 	<div class="row">
 		<div class="col-xs-8"> {{ obj.train_id }}</div>
 		<div class="col-xs-4">
-			<a href="/trainManage/{{ obj.train_id }}" class="button" target="_self"> 查看详情 &nbsp;</a>
-			<a href="/trainManage/update/{{ obj.train_id }}" class="button" target="_self">&nbsp;修改信息 &nbsp;</a>
+			<a href="/trainManage/detail/{{ obj.train_id }}" class="button" target="_self"> 查看详情 &nbsp;</a>
+            <a href="/trainManage/delete/{{ obj.train_id }}" class="button" target="_self">删除车次 &nbsp;</a>
 		</div>
 	</div>
 	{% endfor %}
+	<div><a type="button" href="/trainManage/create" target="_self">添加列车</div>
 </div>
 {% endblock %}
 

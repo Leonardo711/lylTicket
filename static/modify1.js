@@ -9,16 +9,16 @@ $(document).ready(function(){
         if (el.name) el.name = el.name.replace(id_regex, replacement);
     }
 
-    function deleteForm(btn, prefix) {
-		var forms = $('.item'); // Get all the forms
+    function deleteForm(btn, prefix, classname, warning2) {
+		var forms = $(classname); // Get all the forms
 		var formCount = forms.length;
         if (formCount > 1) {
             // Delete the item/form
-            $(btn).parents('.item').remove();
-            // Update the total number of forms (2 less than before)
+            $(btn).parents(classname).remove();
+            // Update the total number of forms (1 less than before)
             $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
             // Go through the forms and set their indices, names and IDs
-            forms = $(".item");
+            forms = $(classname);
             formCount = forms.length;
             for (var i=0; i < formCount; i++) {
                 $(forms.get(i)).find("[readonly=readonly]").val(i+1);
@@ -28,21 +28,22 @@ $(document).ready(function(){
             }
         } // End if
         else {
-            alert("至少要有一个车站信息");
+            alert(warning2);
         }
         return false;
     }
 
-    function addForm(btn, prefix) {
-		var forms = $('.item'); // Get all the forms
+    function addForm(btn, prefix, classname,max_num, deletename, warning1, warning2) {
+		var forms = $(classname); // Get all the forms
 		var formCount = forms.length;
         // You can only submit a maximum of 10 station for a train.
-        if (formCount < 10) {
-            var row = $(".item:last").clone(false).get(0);
+        if (formCount < max_num) {
+            var lastone = classname+":last"
+            var row = $(lastone).clone(false).get(0);
             // Insert it after the last form
 			tmp = parseInt($(row).find("[readonly=readonly]").val());
 			$(row).find("[readonly=readonly]").val(tmp+1);
-            $(row).removeAttr('id').hide().insertAfter(".item:last").slideDown(300);
+            $(row).removeAttr('id').hide().insertAfter(lastone).slideDown(300);
 
             $(row).children().children().children().each(function () {
                 updateElementIndex(this, prefix, formCount);
@@ -53,23 +54,30 @@ $(document).ready(function(){
             });
 
             // Add an event handler for the delete item/form link
-            $(row).find("[name=delete]").click(function () {
-                return deleteForm(this, prefix);
+            var newAttr = "[name=" + deletename +"]"
+            $(row).find(newAttr).click(function () {
+                return deleteForm(this, prefix, classname ,warning2);
             });
             // Update the total form count
             $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
         } // End if
         else {
-            alert("最多只能有10个车站。");
+            alert(warning1);
         }
         return false;
     }
     // Register the click event handlers
     $("#add").click(function () {
-        return addForm(this, "run_set");
+        return addForm(this, "run_set", ".item", 10, "delete", "最多有10个车站", "最少有一个车站");
     });
 
+    $("#add1").click(function () {
+        return addForm(this, "seat_set", ".item1", 20, "delete1", "最多有20个车厢", "最少有一个车厢");
+    });
     $("[name='delete']").click(function () {
-        return deleteForm(this, "run_set");
+        return deleteForm(this, "run_set", ".item", "最少有一个车站");
+    });
+    $("[name='delete1']").click(function () {
+        return deleteForm(this, "seat_set", ".item1","最少有一个车厢");
     });
 });

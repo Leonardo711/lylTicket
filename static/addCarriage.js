@@ -28,7 +28,7 @@ $(document).ready(function(){
             }
         } // End if
         else {
-            alert("至少要有一个车站信息");
+            alert("至少要有一个车厢");
         }
         return false;
     }
@@ -60,16 +60,16 @@ $(document).ready(function(){
             $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
         } // End if
         else {
-            alert("最多只能有10个车站。");
+            alert("最多只能有20个车厢。");
         }
         return false;
     }
     // Register the click event handlers
     $("#add").click(function () {
-        return addForm(this, "run_set");
+        return addForm(this, "carriage_set");
     });
 
     $("[name='delete']").click(function () {
-        return deleteForm(this, "run_set");
+        return deleteForm(this, "carriage_set");
     });
 });

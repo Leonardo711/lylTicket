@@ -1,6 +1,6 @@
 from django import forms
-from .models import Train, Run, Station
-from django.forms import BaseInlineFormSet, inlineformset_factory
+from .models import Train, Run, Station, Seat, Carriage
+from django.forms import  inlineformset_factory
 
 class TrainForm(forms.ModelForm):
     class Meta:
@@ -50,3 +50,10 @@ RunForm_stationSet = inlineformset_factory(Train,
 #        formset=CustomInlineFormSetForRunForm
         )
 
+CarriageForm = inlineformset_factory(Train,
+                                 Carriage,
+                                 fields=('carriage_id', 'num_seat', 'seat_type'),
+                                 extra =1,
+                                 max_num=20,
+                                 widgets={'carriage_id':forms.TextInput(attrs={"readonly":"readonly"})},
+                                 )

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}添加车次{% endblock %}
+{% block content %}
+<div class="container">
+    <form method="post">{% csrf_token %}
+        <div class="">
+            <p>列车编号：{{ form.train_id }}</p>
+            <p><a href="/trainManage/" target="_self" class="button">返回列表</a></p>
+        </div>
+        <div>
+            {{ item_form.management_form }}
+            {{ item_form.non_form_erros }}
+            <br/><br/><hr/>
+            <b>添加车厢：</b><br/>
+            <div class="station">
+                <table class = "table table-hover">
+                    <thead>
+                    <tr>
+                        <th> 车厢编号 </th>
+                        <th> 座位数 </th>
+                        <th> 座位类型 </th>
+                    </tr>
+                    </thead>
+                    {% for form in item_form %}
+                    <p style="display:none">{{form.DELETE}}</p>
+                    <tbody class="item">
+                    <tr>
+                        <td> {{form.carriage_id}}</td>
+                        <td> {{form.num_seat}} </td>
+                        <td> {{form.seat_type}} </td>
+                        <td><a class="button" href="" name="delete">删除</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                    <td><input type="button" value="添加车厢" id="add" class="button"/></td>
+                </table>
+            </div>
+        </div>
+        <input type="submit" value="提交" />
+    </form>
+    <script type="text/javascript" src='/static/addCarriage.js'>
+    </script>
+    {% endblock %}

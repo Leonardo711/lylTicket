@@ -3,12 +3,15 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView
-from .models import Train, Run, Station
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+from .models import Train, Run, Station, Carriage,Seat
 from .forms import *
 from django.forms import formset_factory
 from datetime import datetime
+from datetime import datetime, timedelta
 
+timeSpan = 3 # 卖票的时间跨度
 # Create your views here.
 class train_ListView(ListView):
     model = Train
@@ -33,9 +36,7 @@ class train_create(CreateView):
         form_class = self.get_form_class()
         form =self.get_form(form_class)
         run_form = RunForm_stationSet(request.POST)
-        print(type(run_form))
-        print(request.POST[u'run_set-TOTAL_FORMS'])
-        if (form.is_valid() and run_form.is_valid()):
+        if (form.is_valid() and run_form.is_valid() ):
             num_station = run_form.total_form_count()
             train = form.save(commit=False)
             self.object=train
@@ -70,6 +71,7 @@ class train_create(CreateView):
                 run.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
+            print("wrong validation")
             return self.render_to_response(
                     self.get_context_data(form=form,
                         item_form=run_form))
@@ -79,4 +81,54 @@ class train_detail(DetailView):
     model = Train
     template_name = "train_detail.html"
     context_object_name = "train"
+
+class train_delete(DeleteView):
+    model = Train
+    template_name = "train_confirm_delete.html"
+    success_url = '/trainManage/'
+
+
+class addCarriage(CreateView):
+    model = Train
+    template_name = "addCarriage.html"
+    success_url = "/trainManage/"
+
+
+    def get(self, request, *args, **kwargs):
+        self.object = Train.objects.get(train_id = kwargs['pk'])
+        carriage_form = CarriageForm()
+        return self.render_to_response(self.get_context_data(form=self.object, item_form=carriage_form))
+
+    def post(self, request, *args, **kwargs):
+        print(request)
+        self.object = Train.objects.get(train_id = kwargs['pk'])
+        carriage_form = CarriageForm(request.POST)
+        if ( carriage_form.is_valid() ):
+            status = '1'*self.object.num_station
+            train_id = self.object
+            for carriageform in carriage_form:
+                carriage = carriageform.save(commit=False)
+                carriage.train_id = self.object
+                carriage.carriage_key = Carriage.generateCarriageKey(self.object.train_id, carriage.carriage_id)
+                carriage.save()
+                for seat_id in range(1, carriage.num_seat+1):
+                    for i in range(timeSpan):
+                        print(i)
+                        date = datetime.date(datetime.today()+timedelta(i))
+                        seat_key = Seat.generateSeatRunKey(date, carriage.carriage_key, seat_id)
+                        print(seat_key)
+                        seat = Seat(seat_key = seat_key,
+                                    carriage=carriage,
+                                    seat_id = seat_id,
+                                    date=date,
+                                    status=status)
+                        print("nothing wrong here")
+                        seat.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            print("wrong validation")
+            return self.render_to_response(
+                self.get_context_data(form=self.object,
+                                      item_form=carriage_form))
+
 
