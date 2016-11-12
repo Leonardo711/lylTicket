@@ -16,6 +16,9 @@ class TicketQueryForm(forms.Form):
     date = forms.DateField(required=True, widget=forms.DateInput())
 
 
-#class QueryResultForm(forms.Form):
+class QueryResultForm(forms.Form):
+    startStation = forms.ModelChoiceField(queryset=Station.objects.all(), required=True)
+    endStation = forms.ModelChoiceField(queryset=Station.objects.all(), required=True)
+    date = forms.DateField(required=True, widget=forms.DateInput())
 
 

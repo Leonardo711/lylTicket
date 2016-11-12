@@ -6,24 +6,38 @@
             <p>出发地 {{form.startStation}}</p>
             <p>目的地 {{form.endStation}}</p>
             <p>出发时间{{form.date}} {{form.date.errors}}</p>
-        <input type="submit" value="查询" />
+        <input type="submit" value="查询"  name="search"/>
         </div>
     </form>
 </div>
 <div class="container">
     {% if resultSet %}
+        <p> {{date.year}}年{{date.month}}月{{date.day}}日</p>
         {% for train_id, type_seat in resultSet.iteritems %}
             <div>
-                <p> {{ startStation.station_name }} ---->  {{ endStation.station_name}} </p>
-                {% for type, seat in type_seat.iteritems %}
-                    {{ type }}: {{ seat|length }}
-                {% endfor %}
-                <p>
-                </p>
+                <form method="post" action="/ticketQuery/order/">{% csrf_token %}
+                    <p> {{ startStation.station_name }} ---->  {{ endStation.station_name}} </p>
+                    <input type="hidden" value="{{startStation.station_name}}" name="start"/>
+                    <input type="hidden" value="{{endStation.station_name}}" name="end"/>
+                    <input type="hidden" value="{{date}}" name="date"/>
+                    <p> {{ train_id }}</p>
+                    <input type="hidden" value="{{train_id}}" name="train_id"/>
+                    <p>
+                        {% for type, seatSet in type_seat.iteritems %}
+                            {{ type }}: {{ seatSet|length }}
+                                {% for seat in seatSet %}
+                                    <input name="{{type}}_{{forloop.counter}}" value=" {{seat.seat_key}}" type="hidden"/>
+                                    <input type="hidden" value= {{forloop.counter}} name="{{type}}_counter"/>
+                                {% endfor %}
+                        <input type="hidden" value={{type}} name="seat_type_{{forloop.counter}}"/>
+                        <input type="hidden" value={{forloop.counter}} name="seat_type_num"/>
+                        {% endfor %}
+
+                        <input type="submit" value="预订" name="order"/>
+                    </p>
+                </form>
             </div>
         {% endfor %}
     {% endif %}
 </div>
-    <script type="text/javascript" src='/static/modify.js'>
-    </script>
 {% endblock %}

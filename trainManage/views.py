@@ -54,7 +54,8 @@ class train_create(CreateView):
             for runForm in run_form:
                 run = runForm.save(commit=False)
                 runCount = run.order_of_station
-                arrive_time = datetime.strptime(run.arrive_time, "%H:%M")
+                #arrive_time = datetime.strptime(run.arrive_time, "%H:%M")
+                arrive_time = run.arrive_time
                 time_list.append(arrive_time)
                 if(runCount != 1):
                     pre_arrive = time_list[runCount -1]

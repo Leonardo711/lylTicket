@@ -1,0 +1,26 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="container">
+    <form method="post">{% csrf_token %}
+        <div class="">
+            <p>{{start}} ----> {{end}}</p>
+            <p>{{train_id}}</p>
+            <p> {{date.year}}年{{date.month}}月{{date.day}}日</p>
+            {% for type, seatSet in seat_type_to_seat_key.iteritems %}
+                <div>
+                {{ type }}: {{ seatSet|length }}
+                <input value = "{{type}}" name="seat_type" type="checkbox">
+                    {% for seat in seatSet %}
+                    <input name="{{type}}_{{forloop.counter}}" value=" {{seat.seat_key}}" type="hidden"/>
+                    <input type="hidden" value= {{forloop.counter}} name="{{type}}_counter"/>
+                    {% endfor %}
+                    <input type="hidden" value={{type}} name="seat_type_{{forloop.counter}}"/>
+                    <input type="hidden" value={{forloop.counter}} name="seat_type_num"/>
+                    {% endfor %}
+                </div>
+            <input type="submit" value="购买" name="buy"/>
+        </div>
+    </form>
+</div>
+</script>
+{% endblock %}

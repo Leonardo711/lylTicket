@@ -30,6 +30,37 @@ class ticketQuery(TemplateView):
                                                              endStation=endStation,
                                                              date = date,
                                                              resultSet=resultSet))
+
+class ticketOrder(TemplateView):
+    template_name = "ticket_order.html"
+    def post(self, request):
+        # rebuild the result to a dictionary which store the result
+        seat_type_to_seat_key = {}
+        train_id = request.POST['train_id']
+        start = request.POST['start']
+        end = request.POST['end']
+        date = request.POST['date']
+        date = datetime.date(datetime.strptime(date, "%b. %d, %Y"))
+        print(date)
+        seat_type_num = request.POST['seat_type_num']
+        for i in range(1, int(seat_type_num)+1):
+            seat_type_index = "seat_type_" + str(i)
+            seat_type = request.POST[seat_type_index]
+            seat_type_counter_index = seat_type + "_counter"
+            seat_type_counter = request.POST[seat_type_counter_index]
+            for j in range(1, int(seat_type_counter)+1):
+                seat_index = seat_type +"_" + str(j)
+                seat_key = request.POST[seat_index]
+                seat_key_set = seat_type_to_seat_key.setdefault(seat_type, [])
+                seat_key_set.append(seat_key)
+
+        # they are all strings , not objects
+        return self.render_to_response(self.get_context_data(seat_type_to_seat_key=seat_type_to_seat_key,
+                                                             train_id = train_id,
+                                                             date=date,
+                                                             start=start,
+                                                             end = end))
+
 # This is a class for search process
 class Query(object):
     def __init__(self, start, end, date):
