@@ -1,0 +1,29 @@
+{% extends "base1.html" %}
+{% block content %}
+<div class="container">
+    <form method="post">{% csrf_token %}
+        <div class="">
+            <p>出发地 {{form.startStation}}</p>
+            <p>目的地 {{form.endStation}}</p>
+            <p>出发时间{{form.date}} {{form.date.errors}}</p>
+        <input type="submit" value="查询" />
+        </div>
+    </form>
+</div>
+<div class="container">
+    {% if resultSet %}
+        {% for train_id, type_seat in resultSet.iteritems %}
+            <div>
+                <p> {{ startStation.station_name }} ---->  {{ endStation.station_name}} </p>
+                {% for type, seat in type_seat.iteritems %}
+                    {{ type }}: {{ seat|length }}
+                {% endfor %}
+                <p>
+                </p>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+    <script type="text/javascript" src='/static/modify.js'>
+    </script>
+{% endblock %}

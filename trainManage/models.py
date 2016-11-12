@@ -38,7 +38,7 @@ class Run(models.Model):
     station_name = models.ForeignKey(Station, on_delete=models.CASCADE)
     train_come_by = models.ForeignKey(Train, on_delete=models.CASCADE)
     order_of_station = models.IntegerField(default = 1)
-    arrive_time = models.CharField("到站时间", max_length = 10)
+    arrive_time = models.TimeField("到站时间", max_length = 10)
     distance_count = models.FloatField("里程数")
     count_over_night = models.IntegerField(default = -1)
 
@@ -86,11 +86,11 @@ class Seat(models.Model):
     status = models.CharField(max_length=100)
     
     def __str__(self):
-        return str(self.carriage.carriage_id) + '\t' \
+        return str(self.carriage.carriage_id) + str(self.date) \
                + str(self.seat_id)
 
     def __unicode__(self):
-        return str(self.carriage.carriage_id) + '\t' \
+        return str(self.carriage.carriage_id) + str(self.date) \
                + str(self.seat_id)
     class Meta:
         ordering = ["seat_key", "date"]

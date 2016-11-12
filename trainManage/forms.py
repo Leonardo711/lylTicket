@@ -46,7 +46,8 @@ RunForm_stationSet = inlineformset_factory(Train,
         fields=('order_of_station', 'station_name', 'arrive_time', 'distance_count'),
         extra=1,
         max_num= 10,
-        widgets={'order_of_station':forms.TextInput(attrs={'readonly':'readonly'})},
+        widgets={'order_of_station':forms.TextInput(attrs={'readonly':'readonly'}),
+                 'arrive_time':forms.TimeInput()},
 #        formset=CustomInlineFormSetForRunForm
         )
 

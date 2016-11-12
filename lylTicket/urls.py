@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^trainManage/', include('trainManage.urls')),
+    url(r'^ticketQuery/', include("ticketQuery.urls")),
 ]

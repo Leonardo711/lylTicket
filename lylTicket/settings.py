@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'trainManage',
+    'ticketQuery',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -79,9 +80,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "lylTicket1",
-        'USER': "inplus",
-        'PASSWORD':'labd203',
-        'HOST':'172.18.181.134',
+     #   'USER': "inplus",
+     #   'PASSWORD':'labd203',
+     #   'HOST':'172.18.181.134',
+        'USER':'root',
+        "PASSWORD":'09270706',
+        'HOST':'127.0.0.1',
     }
 }
 
