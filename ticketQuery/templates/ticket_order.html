@@ -9,7 +9,7 @@
             {% for type, seatSet in seat_type_to_seat_key.iteritems %}
                 <div>
                 {{ type }}: {{ seatSet|length }}
-                <input value = "{{type}}" name="seat_type" type="checkbox">
+                <input value = "{{type}}" name="seat_type" type="radio">
                     {% for seat in seatSet %}
                     <input name="{{type}}_{{forloop.counter}}" value=" {{seat.seat_key}}" type="hidden"/>
                     <input type="hidden" value= {{forloop.counter}} name="{{type}}_counter"/>
