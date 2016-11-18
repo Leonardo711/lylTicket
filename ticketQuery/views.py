@@ -15,6 +15,7 @@ class ticketQuery(TemplateView):
         return self.render_to_response(self.get_context_data(form=form))
 
     def post(self, request, *args, **kwargs):
+        request.session['test'] = False;
         form = self.form_class(request.POST)
         startStationID = request.POST['startStation']
         startStation = Station.objects.get(id=startStationID)
@@ -42,6 +43,7 @@ class ticketOrder(TemplateView):
         date = request.POST['date']
         date = datetime.date(datetime.strptime(date, "%b. %d, %Y"))
         print(date)
+        print(request.session.keys())
         seat_type_num = request.POST['seat_type_num']
         for i in range(1, int(seat_type_num)+1):
             seat_type_index = "seat_type_" + str(i)

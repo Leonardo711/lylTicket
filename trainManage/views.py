@@ -10,14 +10,15 @@ from .forms import *
 from django.forms import formset_factory
 from datetime import datetime
 from datetime import datetime, timedelta
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 timeSpan = 3 # 卖票的时间跨度
 # Create your views here.
-class train_ListView(ListView):
+class train_ListView(LoginRequiredMixin, ListView):
     model = Train
     template_name = 'train_list.html'
 
-class train_create(CreateView):
+class train_create(LoginRequiredMixin, CreateView):
     model = Train
     template_name = "train_create.html"
     success_url = "/trainManage/"
@@ -83,13 +84,13 @@ class train_detail(DetailView):
     template_name = "train_detail.html"
     context_object_name = "train"
 
-class train_delete(DeleteView):
+class train_delete(LoginRequiredMixin, DeleteView):
     model = Train
     template_name = "train_confirm_delete.html"
     success_url = '/trainManage/'
 
 
-class addCarriage(CreateView):
+class addCarriage(LoginRequiredMixin, CreateView):
     model = Train
     template_name = "addCarriage.html"
     success_url = "/trainManage/"
