@@ -17,7 +17,7 @@ class Train(models.Model):
         return self.train_id
 
 class Station(models.Model):
-    station_id = models.IntegerField(default = -1)
+    station_id = models.IntegerField(default = 0, primary_key=True)
     station_name = models.CharField("途经车站", max_length=20)
     station_city = models.CharField("所属城市", max_length=20)
 

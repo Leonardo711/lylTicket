@@ -18,9 +18,9 @@ class ticketQuery(TemplateView):
         request.session['test'] = False;
         form = self.form_class(request.POST)
         startStationID = request.POST['startStation']
-        startStation = Station.objects.get(id=startStationID)
+        startStation = Station.objects.get(station_id=startStationID)
         endStationID = request.POST['endStation']
-        endStation = Station.objects.get(id=endStationID)
+        endStation = Station.objects.get(station_id=endStationID)
         date =  datetime.strptime(request.POST['date'], "%m/%d/%Y")
         date = datetime.date(date)
         query = Query(startStation, endStation, date)
