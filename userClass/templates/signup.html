@@ -1,0 +1,65 @@
+{% extends "signInUpBase.html" %}
+{% block content %}
+<div class="login" style="margin-top:50px;">
+    <div class="header">
+        <div class="switch" id="switch">
+            <a class="switch_btn_focus" id="switch_qlogin" href="/accounts/login" tabindex="7">快速登录</a>
+            <a class="switch_btn" id="switch_login" href="javascript:void(0);" tabindex="8">快速注册</a>
+            <div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 154px;"></div>
+        </div>
+    </div>
+
+
+    <!--注册-->
+    <div class="qlogin" id="qlogin" style="display: block; height: 235px;">
+
+        <div class="web_login">
+            <form name="form2" id="regUser" accept-charset="utf-8"  action="" method="post">
+            {% csrf_token %}
+                <input type="hidden" name="to" value="reg"/>
+                <input type="hidden" name="did" value="0"/>
+                <ul class="reg_form" id="reg-ul">
+                    <li>
+
+                        <label class="input-tips2">邮箱：</label>
+                        <div class="inputOuter2">
+                            <p>{{ form.username }}</p>
+
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <label class="input-tips2">密码：</label>
+                        <div class="inputOuter2">
+                            {{form.password}}
+                        </div>
+
+                    </li>
+                    <li>
+                        <label class="input-tips2">确认密码：</label>
+                        <div class="inputOuter2">
+                            {{form.passwordagain}}
+
+                        </div>
+
+                    </li>
+
+
+                    <li>
+                        <div class="inputArea">
+                            <input type="submit" id="reg"  style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册"/> <a href="#" class="zcxy" target="_blank">注册协议</a>
+                        </div>
+
+                    </li><div class="cl"></div>
+                </ul>
+            </form>
+
+
+        </div>
+
+
+    </div>
+    <!--注册end-->
+</div>
+{% endblock %}

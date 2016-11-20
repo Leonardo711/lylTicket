@@ -1,0 +1,48 @@
+{% extends "signInUpBase.html" %}
+{% block content %}
+<div class="login" style="margin-top:50px;">
+    <div class="header">
+        <div class="switch" id="switch">
+            <a class="switch_btn" id="switch_qlogin" href="javascript:void(0);" tabindex="7">快速登录</a>
+            <a class="switch_btn_focus" id="switch_login" href="/accounts/signup" tabindex="8">快速注册</a>
+            <div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 0px;"></div>
+        </div>
+    </div>
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">
+        <!--登录-->
+        <div class="web_login" id="web_login">
+            <div class="login-box">
+                <div class="login_form">
+                    <form action="" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="to" value="log"/>
+                        <div class="uinArea" id="uinArea">
+                            <label class="input-tips" >邮箱：</label>
+                            <div class="inputOuter" id="uArea">
+                                <p>{{ form.username }}</p>
+                            </div>
+                        </div>
+                        <div class="pwdArea" id="pwdArea">
+                            <label class="input-tips">密码：</label>
+                            <div class="inputOuter" id="pArea">
+                                {{ form.password }}
+                            </div>
+                        </div>
+                        <div style="padding-left:50px;margin-top:20px;">
+                            <input type="submit" value="登 录" style="width:150px;" class="button_blue"/>
+                            <input type="hidden" name="next" value="{{ next }}" />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <!--登录end-->
+    </div>
+
+</div>
+{% endblock %}

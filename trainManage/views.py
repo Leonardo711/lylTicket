@@ -10,15 +10,17 @@ from .forms import *
 from django.forms import formset_factory
 from datetime import datetime
 from datetime import datetime, timedelta
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 timeSpan = 3 # 卖票的时间跨度
 # Create your views here.
-class train_ListView(LoginRequiredMixin, ListView):
+class train_ListView(PermissionRequiredMixin, ListView):
+    permission_required = "trainManage.add_train"
     model = Train
     template_name = 'train_list.html'
 
-class train_create(LoginRequiredMixin, CreateView):
+class train_create(PermissionRequiredMixin, CreateView):
+    permission_required = "trainManage.add_train"
     model = Train
     template_name = "train_create.html"
     success_url = "/trainManage/"
@@ -79,18 +81,21 @@ class train_create(LoginRequiredMixin, CreateView):
                         item_form=run_form))
 
 
-class train_detail(DetailView):
+class train_detail(PermissionRequiredMixin,DetailView):
+    permission_required = "trainManage.add_train"
     model = Train
     template_name = "train_detail.html"
     context_object_name = "train"
 
-class train_delete(LoginRequiredMixin, DeleteView):
+class train_delete(PermissionRequiredMixin, DeleteView):
+    permission_required = "trainManage.add_train"
     model = Train
     template_name = "train_confirm_delete.html"
     success_url = '/trainManage/'
 
 
-class addCarriage(LoginRequiredMixin, CreateView):
+class addCarriage(PermissionRequiredMixin, CreateView):
+    permission_required = "trainManage.add_train"
     model = Train
     template_name = "addCarriage.html"
     success_url = "/trainManage/"

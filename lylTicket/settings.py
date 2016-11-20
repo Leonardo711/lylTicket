@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'bootstrap_admin',
+    'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,12 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'trainManage',
     'ticketQuery',
-    'users',
+    'userClass',
+    #'users',
 
 ]
-#BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
+BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 
-AUTH_USER_MODEL = 'users.User'
+#AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,7 +54,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'lylTicket.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "lylTicket",
+        'NAME': "lylTicket1",
         'USER': "inplus",
         'PASSWORD':'labd203',
         'HOST':'172.18.181.134',
@@ -132,9 +133,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static"),
         )
-USERS_CREATE_SUPERUSER = 'superuser@djangoproject.com'
-LOGIN_REDIRECT_URL = '/trainManage/'
+##------Email---------
+#
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST_USER = '15918671597@163.com'
+EMAIL_HOST_PASSWORD = 'Leo744739wy'
+EMAIL_PORT = 25
+EMAIL_USE_TLS=True
+
+LOGIN_REDIRECT_URL = '/ticketQuery/'
+DOMAIN = '127.0.0.1:8000'
