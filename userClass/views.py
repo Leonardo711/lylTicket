@@ -69,7 +69,7 @@ class signup(TemplateView):
             message = "\n".join([u'欢迎注册lyl火车票预订系统', u'请访问该链接，完成邮箱验证:',
                                  "http://"+'/'.join([django_settings.DOMAIN, 'accounts','activate', token])])
             send_mail(u'注册用户验证信息', message,django_settings.EMAIL_HOST_USER, [email])
-            user.groups.add(Group.objects.get(codename="registedUser"))
+            user.groups.add(Group.objects.get(name="registedUser"))
             return render(request, "signUpSuccess.html")
 
 def active_user(request, token):
