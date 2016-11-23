@@ -13,6 +13,11 @@ import base64
 
 from django.conf import settings as django_settings
 
+
+
+
+
+
 class Token:
     def __init__(self, security_key):
         self.security_key = security_key
@@ -117,3 +122,84 @@ def active_user(request, token):
 #            loginErrorMessage = ''
 #            print "unvalid", (request.POST)
 #            return self.render_to_response(self.get_context_data(form=form, errorMessage=loginErrorMessage))
+
+class passwordreset(TemplateView):
+    form_class = PasswordResetForm
+    template_name = "password_reset.html"
+    def get(self, request, *args, **kwargs):
+        form = PasswordResetForm()
+        print request.GET
+        return self.render_to_response(self.get_context_data(form = form))
+
+
+    def post(self, request, *args, **kwargs):
+        print "get post"
+        form = self.form_class(request.POST)
+        if not form.is_valid():
+            print form.is_valid()
+            return self.render_to_response(self.get_context_data(form = form))
+        else:
+            username = form.cleaned_data.get('username')
+            email = username
+            print username
+            token = token_confirm.generate_validate_token(username)
+            message = "\n".join([u'请访问该链接，完成密码重置:',
+                                 "http://"+'/'.join([django_settings.DOMAIN, 'accounts','password_reset_confirm', token])])
+            send_mail(u'密码重置', message,django_settings.EMAIL_HOST_USER, [email])
+
+            #user.groups.add(Group.objects.get(name="registedUser"))
+            return render(request, "resetEmailSended.html")
+'''
+class passwordresetconfirm(TemplateView):
+    form_class = SignUpForm
+    template_name = "password_reset_confirm.html"
+
+    def get(self, request, *args, **kwargs):
+        form = SignUpForm()
+        print request.GET
+        return self.render_to_response(self.get_context_data(form = form))
+'''
+        
+def passwordresetconfirm(request, token):
+    #print(token)
+    try:
+        username = token_confirm.confirm_validate_token(token)
+    except:
+        username = token_confirm.remove_validate_token(token)
+        users = User.objects.filter(username=username)
+        for user in users:
+            user.delete()
+        return HttpResponse("对不起，重置密码链接已过期，请重新申请")
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return HttpResponse("对不起，您所验证的用户不存在，请重新注册")    
+
+    if request.method=="GET":
+        form = PasswordResetForm2()
+        return render(request,'password_reset_confirm.html',{'form':form})
+
+     
+    if request.method=="POST":
+        form = PasswordResetForm2(request.POST)
+        if not form.is_valid():
+            print form.is_valid()
+            return self.render_to_response(self.get_context_data(form = form))
+        else:
+            password = form.cleaned_data.get('password')
+            passwordagain = form.cleaned_data.get('passwordagain')
+            if password!=passwordagain:
+                return HttpResponse("对不起，两次密码不一致！")
+            else:
+                user.set_password(password)
+                user.save()
+                return HttpResponse("重置密码成功！")
+
+
+         
+
+  
+    #return HttpResponse("验证完成")        
+        
+  
+        

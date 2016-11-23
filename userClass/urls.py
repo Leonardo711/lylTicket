@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib.auth.views import (login, logout, password_change,
                                        password_change_done, password_reset,
                                        password_reset_complete,
@@ -10,6 +10,8 @@ urlpatterns = [
     url(r'^signup/$', signup.as_view(), name="user_signup"),
     url(r'^activate/(?P<token>\w+.[-_\w]*\w+.[-_\w]*\w+)/$', active_user, name="active user"),
     url(r'^login/$', login,{"template_name":"signin.html"}, name="user_signin"),
+    url(r'^password_reset/$',passwordreset.as_view(),name="password_reset"),
+    url(r'^password_reset_confirm/(?P<token>\w+.[-_\w]*\w+.[-_\w]*\w+)$',passwordresetconfirm,name="password_reset_confirm"),
     #url(r'^register/$', register, name='users_register'),
     #url(r'^register/closed/$', registration_closed, name='users_registration_closed'),
     #url(r'^register/complete/$', registratiomplete, name='users_registration_complete'),

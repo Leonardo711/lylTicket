@@ -17,4 +17,14 @@ class SignInForm(forms.Form):
     username = forms.EmailField(label="邮箱")
     password = forms.CharField(label="密码", widget=forms.PasswordInput)
 
+class PasswordResetForm(forms.Form):
+    username = forms.EmailField(label="邮箱")
+#   password = forms.CharField(label = "密码", widget=forms.PasswordInput)
+#   passwordagain = forms.CharField(label = "确认密码", widget=forms.PasswordInput)
+
+
+class PasswordResetForm2(forms.Form):
+#   username = forms.EmailField(label="邮箱")
+    password = forms.CharField(label = "密码", widget=forms.PasswordInput)
+    passwordagain = forms.CharField(label = "确认密码", widget=forms.PasswordInput)
 
