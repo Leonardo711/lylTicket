@@ -141,8 +141,8 @@ STATICFILES_DIRS = (
 ##------Email---------
 #
 EMAIL_HOST = 'smtp.163.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'lylticket@163.com'
+EMAIL_HOST_PASSWORD = 'django123'
 EMAIL_PORT = 25
 EMAIL_USE_TLS=True
 
