@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<p>重置密码的邮件已发送到您的邮箱，请登录邮箱完成密码重置工作，邮件有效期1小时,即将跳转回登录页面... </p>
+<p><a href="{% url 'user_signin' %}">{% url 'user_signin' %}</a> </p>
+
+<meta http-equiv="refresh" content="5" url="{% url 'user_signin' %}" />
+</body>
+</html>
