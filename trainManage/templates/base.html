@@ -1,14 +1,72 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-		<title>{% block title %}列车管理{% endblock %}</title>
 		<meta charset="utf-8">
 		<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<style>
+	.nav{
+        height: 0px;
+    }
+    .body{
+        height: 100%;
+    }
+    #pill{
+        margin-top: 5px;
+        position: relative;
+    }
+	#footer{     
+        vertical-align:middle; 
+        text-align: center; 
+        margin: 0px auto;
+        position: absolute;
+        bottom: 3px;
+        width: 100%;
+    }
+    #right{     
+        margin-right: 0px;
+    } 
+    #welcome{     
+        margin-top: 10px;
+    } 
+    </style>
 	</head>
 		<script src="/static/js/jquery-2.0.3.js"></script>
 		<script src="/static/js/bootstrap.min.js"></script>
 	<body>
+		<nav class="navbar navbar-default" role="navigation" class="nav">
+    		<div class="navbar-header"><a class="navbar-brand" href="#">火车票服务</a>
+    		</div>
+    <div>
+        <ul class="nav nav-pills" id="pill">
+        	{% block nav %}		        
+            {% endblock %} 
+        </ul>
+        <!--if sign in-->
+         <ul class="nav nav-pills navbar-right" id="right">         
+            <li id="welcome">欢迎,</li>  
+            <li><a href="#">admin</a></li>    
+            <li id="welcome">|</li>  
+            <li><a href="#">退出登录</a></li>   <!--sign out-->
+        </ul>
+        <!--if not sign in-->
+        <!--
+         <ul class="nav nav-pills navbar-right" id="right">         
+            <li id="welcome">您好,请</li>  
+            <li><a href="#">登录</a></li>    
+            <li id="welcome">|</li>  
+            <li><a href="#">注册</a></li>   
+        </ul>-->
+    </div>
+    </nav> 
 		{% block content %}
 		{% endblock %}
 	</body>
+	    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <div id="footer" > 
+        <footer>
+            版权所有 © 2016-2020 中山大学 数据科学与计算机学院</br>
+            李友 李弘艺 袁陶希
+        </footer>  
+        </div>
+    </nav> 
 </html>
