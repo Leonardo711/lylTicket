@@ -1,0 +1,151 @@
+{% extends "base1.html" %}
+
+{% block content %}
+<html lang="zh-CN">
+<head>
+    <title>车票购买</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    .table th{
+        text-align: center;
+        background-color: #39f;
+        font-weight:bold;
+        color: #fff;
+    }
+    #table_content td{
+        text-align: center;
+        vertical-align:middle;
+    }
+
+    #order_warning{     
+        border: 1px solid #09f;
+        border-radius: 10px;
+        width: 60%; 
+        background-color:#eee;
+        height: 100px;
+    } 
+    #order_warning_content{   
+        vertical-align: center;
+        margin-top: 35px;
+        text-align: center;
+        font-size: 18px;
+        font-weight:bold;
+    } 
+
+    #order_info{    
+        width: 60%;
+        margin: 20px auto;
+    } 
+    #order_info_title{     
+        font-size:18px;
+        background-color:#eee;
+        padding-top: 5px; 
+        padding-bottom: 5px;
+        padding-left: 10px;
+        border-bottom: 2px solid #bbb;
+    } 
+    #order_info_date{     
+        font-weight:bold;
+        font-size:18px;
+        background-color:#eee;
+        padding-top: 5px;
+        padding-bottom: 3px; 
+        padding-left: 15px;
+    } 
+
+    #thirty{     
+        font-size: 22px;
+        color:#F90;
+    }
+    #clock{     
+        font-size: 22px;
+        color:#F90;
+    }
+    #buy{     
+        text-align: center;
+    } 
+    </style>
+
+    <script src="/static/js/jquery-2.0.3.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <script>  var x = 30,
+            interval;
+        window.onload = function() {
+            var d = new Date("1111/1/1,0:" + x + ":0");
+            interval = setInterval(function() {
+                var m = d.getMinutes();
+                var s = d.getSeconds();
+                m = m < 10 ? "0" + m : m;
+                s = s < 10 ? "0" + s : s;
+                clock.innerHTML = m + ":" + s;
+                if (m == 0 && s == 0) {
+                    clearInterval(interval);
+                    return;
+                }
+                d.setSeconds(s - 1);
+            }, 1000);
+        }
+        </script>                   
+</head>     
+
+    <div class="container" id="order_warning" >
+        <div class="" id="order_warning_content">
+            <span class="glyphicon glyphicon glyphicon-lock" >&nbsp</span><span>席位已锁定，请在<span id="thirty">30</span>分钟内进行支付，完成网上购票。支付剩余时间：<span id="clock"></span></span>
+        </div>
+    </div>
+
+    <div class="" id="order_info">
+        <form method="post">{% csrf_token %}
+            <div class=""  id="order_info_title">
+                <span class="glyphicon glyphicon-book">订单信息</span>
+            </div>
+            <div class="">
+                <div class="" id="order_info_date">
+                    <span> {{date.year}}2016年{{date.month}}12月{{date.day}}10日</span>
+                    <span>{{train_id}}G1234</span>次
+                    <span>{{start}}</span><span>广州站</span><span>——</span><span>{{end}}</sapn><span>北京站</span>
+                </div>
+                <table class = "table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th> 序号 </th>
+                            <th> 姓名 </th>
+                            <th> 身份证号码 </th> 
+                            <th> 票种 </th>
+                            <th> 席别 </th>
+                            <th> 车厢 </th>
+                            <th> 座位号 </th>
+                            <th> 票价(元) </th>
+                        </tr>
+                    </thead>
+                    <p style="display:none">{{form.DELETE}}</p>
+                    <tbody class="item">
+                        <form class="bs-example bs-example-form" role="form">
+                        <tr id="table_content">
+                            <td> 1 </td>
+                            <td> user name </td>
+                            <td> id number </td>
+                            <td> student </td>
+                            <td> second seat </td>
+                            <td> carriage number 01 </td>
+                            <td> seat number 05F </td>
+                            <td> ticket price 234.5 </td>
+                        </tr>
+                        </form>
+                    </tbody>        
+                </table>
+            </div>
+
+            <div class="" id="buy">
+                <button type="button" class="btn btn-danger btn-lg" style="font-size:16px" onclick="window.location.href='#'">取消订单<span class="glyphicon glyphicon-remove"></span></button><span>&nbsp&nbsp</span>
+                <button type="submit" class="btn btn-warning btn-lg" style="font-size:16px" onclick="window.location.href='#'">&nbsp去支付&nbsp<span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+        </form>
+    </div>
+
+<script type="text/javascript" src='/static/modify.js'>
+</script>
+{% endblock %}
