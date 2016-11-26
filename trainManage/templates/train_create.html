@@ -56,8 +56,13 @@
         padding-left: 0px;
         padding-right: 0px;
     } 
-    #buy{     
-        text-align: right;
+    #leftbutton{     
+
+        float:left;
+    } 
+    #rightbutton{     
+
+        float:right;
     } 
 
     </style>
@@ -105,8 +110,9 @@
 						{% endfor %}
 					</tbody>
         </table>
-        <div class="" id="buy"><button type="submit" class="btn btn-warning glyphicon glyphicon-chevron-left" style="font-size:16px" onclick="window.location.href='/trainManage/'">返回列表</button>&nbsp&nbsp
-    	<button type="button" id="add" class="btn btn-primary glyphicon glyphicon-plus" style="font-size:16px">添加站点</button></div>   
+        <div class="" id="leftbutton"><button type="button" class="btn btn glyphicon glyphicon-chevron-left" style="font-size:16px" onclick="window.location.href='/trainManage/'">返回列表</button>&nbsp&nbsp
+    	<button type="button" id="add" class="btn btn-info glyphicon glyphicon-plus" style="font-size:16px">添加站点</button></div>   
+        <div class="" id="rightbutton"><button type="submit" class="btn btn-warning btn-lg" style="font-size:16px" >确认提交<span class="glyphicon glyphicon-ok" ></span></button></div>   
     </div>
 
 <script type="text/javascript" src='/static/modify.js'>
