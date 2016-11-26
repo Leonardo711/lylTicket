@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<style>
+	.nav{
+        height: 0px;
+    }
+    .body{
+        height: 100%;
+    }
+    #pill{
+        margin-top: 5px;
+        position: relative;
+    }
+	#footer{     
+        vertical-align:middle; 
+        text-align: center; 
+        margin: 0px auto;
+        position: absolute;
+        bottom: 3px;
+        width: 100%;
+    }
+    #right{     
+        margin-right: 0px;
+    } 
+    #welcome{     
+        margin-top: 10px;
+    } 
+    </style>
+</head>
+	<script src="/static/js/jquery-2.0.3.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+<body>
+	<nav class="navbar navbar-default" role="navigation" class="nav">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">火车票服务</a>
+    </div>
+    <div>
+        <ul class="nav nav-pills" id="pill">
+            <li class=""><a href="/ticketQuery">车票预订</a></li>
+        </ul>
+        <!--if sign in-->
+         <ul class="nav nav-pills navbar-right" id="right">         
+            <li id="welcome">欢迎,</li>  
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">admin <!--user name-->
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                	<li ><a href="/user_info/order_query">订单查询</a></li>      <!--link-->
+                	<li class="divider"></li>
+                    <li><a href="/user_info/information">个人信息</a></li>       <!--link-->
+                    <li><a href="/user_info/user_contacts">常用联系人</a></li>      <!--link-->
+                    <li class="divider"></li>
+                    <li><a href="#">修改密码</a></li>        <!--link-->
+                </ul>
+            </li>
+            <li id="welcome">|</li>  
+            <li><a href="#">退出登录</a></li>  <!--link-->
+        </ul>
+        <!--if not sign in-->
+        <!--
+         <ul class="nav nav-pills navbar-right" id="right">         
+            <li id="welcome">您好,请</li>  
+            <li><a href="#">登录</a></li>    
+            <li id="welcome">|</li>  
+            <li><a href="#">注册</a></li>   
+        </ul>-->
+    </div>
+    </nav> 
+		{% block content %}
+		{% endblock %}
+	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" class="nav">
+        <div id="footer" > 
+        <footer>
+            版权所有 © 2016-2020 中山大学 数据科学与计算机学院</br>
+            李友 李弘艺 袁陶希
+        </footer>  
+        </div>
+    </nav> 
+</body>
+</html>

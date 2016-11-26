@@ -1,0 +1,185 @@
+{% extends "base1.html" %}
+
+{% block content %}
+<html lang="zh-CN">
+<head>
+    <title>订单查询</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    .table th{
+        text-align: center;
+        background-color: #39f;
+        font-weight:bold;
+        color: #fff;
+    }
+    #table_title{
+        margin-top: 25px;
+        width: 80%; 
+        text-align: left;
+        font-weight:bold;
+        font-size:16px;
+    }
+    #table_content td{
+        text-align: center;
+        vertical-align:middle;
+    }
+    
+    #search_info{     
+        border: 1px solid #09f;
+        border-radius: 25px;
+        text-align:center;
+        margin:0 auto;
+        height: 100px;
+        width: 60%; 
+        background-color:#eee;
+    } 
+    #search_inside{     
+        text-align:center;
+        margin:0 auto;
+        height: 100px;
+        margin-top: 28px;
+    } 
+
+    #order_info{    
+        width: 60%;
+        margin: 20px auto;     
+        background-color:#eee;
+        width: 60%;
+    } 
+    #order_info_title{     
+        font-size:18px;
+        padding-top: 5px; 
+        padding-bottom: 5px;
+        padding-left: 10px;
+
+    } 
+    #order_info_date{     
+        font-weight:bold;
+        font-size:18px;
+        padding-top: 5px;
+        padding-bottom: 3px; 
+        padding-left: 15px;
+    } 
+    #order_list{     
+        border: 1px solid #09f;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        padding-bottom: 10px;
+    } 
+    #buy{     
+        text-align: right;
+        margin-right: 10px;
+    } 
+    </style>
+                        
+</head>     
+    <script src="/static/js/jquery-2.0.3.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <div class="container" id="search_info" >
+        <form method="post"> {% csrf_token %}
+        <div class="container" id="search_inside">
+            <span class="label label-info glyphicon glyphicon-calendar" style="font-size:16px ">&nbsp查询日期&nbsp</span><span>{{form.date}} {{form.date.errors}}<input type="text"></input></span><span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+            <button type="submit" class="btn btn-warning btn-lg glyphicon glyphicon-search" style="font-size:18px">&nbsp&nbsp查询&nbsp&nbsp</button>
+        </div>
+        </form>
+    </div>
+
+    <div class="" id="order_info">
+        <div class=""  id="order_info_title">
+            <span class="glyphicon glyphicon-book">订单信息</span>
+        </div>
+            <!-- if -->
+        <form method="post">{% csrf_token %}
+            <!-- for-->
+            <div class="" id="order_list">
+                <div class="" id="order_info_date">
+                    <span> {{date.year}}2016年{{date.month}}12月{{date.day}}10日</span>
+                    <span>{{train_id}}G1234</span>次
+                    <span>{{start}}</span><span>广州站</span><span>——</span><span>{{end}}</sapn><span>北京站</span>
+                </div>
+                <table class = "table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th> 序号 </th>
+                            <th> 姓名 </th>
+                            <th> 票种 </th>
+                            <th> 席别 </th>
+                            <th> 车厢 </th>
+                            <th> 座位号 </th>
+                            <th> 票价(元) </th>
+                        </tr>
+                    </thead>
+                    <p style="display:none">{{form.DELETE}}</p>
+                    <tbody class="item">
+                        <form class="bs-example bs-example-form" role="form">
+                        <tr id="table_content">
+                            <td> 1 </td>
+                            <td> user name </td>
+                            <td> student </td>
+                            <td> second seat </td>
+                            <td> carriage number 01 </td>
+                            <td> seat number 05F </td>
+                            <td> ticket price 234.5 </td>
+                        </tr>
+                        </form>
+                    </tbody>        
+                </table>
+            
+
+            <div class="" id="buy">
+                <button type="button" class="btn btn-danger btn-lg" style="font-size:16px" onclick="window.location.href='#'">&nbsp退票&nbsp<span class="glyphicon glyphicon-remove"></span></button><span>&nbsp&nbsp</span>
+                <button type="submit" class="btn btn-warning btn-lg" style="font-size:16px" onclick="window.location.href='#'">&nbsp改签&nbsp<span class="glyphicon glyphicon-pencil"></span></button>
+            </div>
+        </div>
+
+        <div class="" id="order_list">
+                <div class="" id="order_info_date">
+                    <span> {{date.year}}2016年{{date.month}}12月{{date.day}}20日</span>
+                    <span>{{train_id}}G4321</span>次
+                    <span>{{start}}</span><span>北京站</span><span>——</span><span>{{end}}</sapn><span>广州站</span>
+                </div>
+                <table class = "table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th> 序号 </th>
+                            <th> 姓名 </th>
+                            <th> 票种 </th>
+                            <th> 席别 </th>
+                            <th> 车厢 </th>
+                            <th> 座位号 </th>
+                            <th> 票价(元) </th>
+                        </tr>
+                    </thead>
+                    <p style="display:none">{{form.DELETE}}</p>
+                    <tbody class="item">
+                        <form class="bs-example bs-example-form" role="form">
+                        <tr id="table_content">
+                            <td> 1 </td>
+                            <td> user name </td>
+                            <td> student </td>
+                            <td> second seat </td>
+                            <td> carriage number 12 </td>
+                            <td> seat number 13A </td>
+                            <td> ticket price 234.5 </td>
+                        </tr>
+                        </form>
+                    </tbody>        
+                </table>
+            
+
+            <div class="" id="buy">
+                <button type="button" class="btn btn-danger btn-lg" style="font-size:16px" onclick="window.location.href='#'">&nbsp退票&nbsp<span class="glyphicon glyphicon-remove"></span></button><span>&nbsp&nbsp</span>
+                <button type="submit" class="btn btn-warning btn-lg" style="font-size:16px" onclick="window.location.href='#'">&nbsp改签&nbsp<span class="glyphicon glyphicon-pencil"></span></button>
+            </div>
+        </div>
+     
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src='/static/modify.js'>
+</script>
+{% endblock %}    

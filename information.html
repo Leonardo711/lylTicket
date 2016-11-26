@@ -1,0 +1,106 @@
+{% extends "base1.html" %}
+
+{% block content %}
+<html lang="zh-CN">
+<head>
+    <title>个人信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    #info{     
+        width:45%;
+        text-align: center;
+        margin: 0, auto;
+    } 
+    #order_info_title{     
+        width: 45%;
+        margin:  auto;
+        font-size:18px;
+        background-color:#eee;
+        margin-top: 10px;
+        padding-left: 10px;
+    } 
+
+    #but{     
+        width: 45%;
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+    } 
+    #button{     
+        margin-top: 25px;
+        text-align: right;
+        margin: 0, auto;
+    }
+</style>
+                        
+</head>     
+    <script src="/static/js/jquery-2.0.3.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+
+    <div class="container"  id="order_info_title">
+        <span class="glyphicon glyphicon-book">基本信息</span>
+    </div>
+
+    <div class ="container" id="info"> 
+        <form class="form" role="form" >
+            <div class="form-group" > 
+                <label class="col-sm-5 control-label">姓名：</label> 
+                <div class="col-sm-3"> <p class="form-control-static" >李明</span></div> 
+            </div> 
+
+            <div class="form-group" > 
+                <label class="col-sm-5 control-label">性别：</label> 
+                <div class="col-sm-3"> <p class="form-control-static">男</p></div>                
+            </div>   
+                    
+            <div class="form-group" > 
+                <label class="col-sm-5 control-label">身份证号码：</label> 
+                <div class="col-sm-3"> <p class="form-control-static">440202199401011234</p></div> 
+            </div>
+        </form>
+    </div>
+
+
+    <div class="container"  id="order_info_title">
+        <span class="glyphicon glyphicon-earphone">联系方式</span>
+    </div>
+
+    <div class="container" id="info">        
+        <form class="form" role="form">
+            <div class="form-group"> 
+                <label class="col-sm-5 control-label">手机号码：</label> 
+                <div class="col-sm-3"> <p class="form-control-static">13822471978</p></div> 
+            </div> 
+
+            <div class="form-group"> 
+                <label class="col-sm-5 control-label">电子邮件：</label> 
+                <div class="col-sm-3"> <p class="form-control-static">django123@163.com</p></div> 
+            </div>                    
+        </form>
+    </div>
+
+    <div class="container"  id="order_info_title">
+        <span class="glyphicon glyphicon-bookmark">附加信息</span>
+    </div>
+
+    <div class="container" id="info">        
+        <form class="form" role="form">
+            <div class="form-group"> 
+                <label class="col-sm-5 control-label">旅客类型：</label> 
+                <div class="col-sm-3"> <p class="form-control-static">学生</p></div> 
+            </div>             
+        </form>
+    </div>
+
+    <div class="" id="but">
+        <div id="button">
+            <button type="button" class="btn btn-info btn-lg" style="font-size:16px" onclick="window.location.href='/user_info/information_edit'">编辑<span class="glyphicon glyphicon-pencil"></span></button>
+        </div>
+    </div>
+<script type="text/javascript" src='/static/modify.js'>
+</script>
+{% endblock %}
