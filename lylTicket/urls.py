@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^trainManage/', include('trainManage.urls')),
     url(r'^ticketQuery/', include("ticketQuery.urls")),
     url(r'^accounts/', include('userClass.urls')),
+    url(r'^addPassenger/',include('addPassenger.urls')),
 
 ]

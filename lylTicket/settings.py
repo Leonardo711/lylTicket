@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ticketQuery',
     'userClass',
     #'users',
+    'addPassenger',
 
 ]
 BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
