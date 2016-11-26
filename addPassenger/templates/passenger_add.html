@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}添加购票人{% endblock %}
+{% block content %}
+<div class="container">
+	<form method="post">{% csrf_token %}
+
+        <b>您好，{{username}}！</b><br/>
+		<div>
+		    {{ item_form.management_form }}
+			{{ item_form.non_form_erros }}
+			<br/><br/><hr/>
+			<b>购票人：</b><br/>
+			<div class="station">
+				<table class = "table table-hover">
+					<thead>
+						<tr>
+							<th> 序号 </th>
+							<th> 乘客姓名 </th>
+							<th> 身份证号码 </th>
+							<th> 学生票 </th>
+						</tr>
+					</thead>
+					{% for form in item_form %}
+					<p style="display:none">{{form.DELETE}}</p>
+					<tbody class="item">
+						<tr>
+							<td> {{form.order}}</td>
+							<td> {{form.passenger_name}}</td>
+							<td> {{form.passenger_id}} </td>
+							<td> {{form.student}}</td>
+						
+						<td><a class="button" href="" name="delete">删除</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+						<td><input type="button" value="添加购票人" id="add" class="button"/></td>
+				</table>
+			</div>
+		</div>
+		<input type="submit" value="提交" />
+	</form>
+<script type="text/javascript" src='/static/modify3.js'>
+</script>
+{% endblock %}

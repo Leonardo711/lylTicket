@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}添加车次{% endblock %}
+{% block content %}
+<div class="container">
+	<form method="post">{% csrf_token %}
+		<div class="">
+			<p>{{form.train_id.label_tag}}{{form.train_id}}{{form.train_id.errors}}</p>
+			<p><a href="/trainManage/" target="_self" class="button">返回列表</a></p>
+		</div>
+		<div>
+			{{ item_form.management_form }}
+			{{ item_form.non_form_erros }}
+			<br/><br/><hr/>
+			<b>途经车站：</b><br/>
+			<div class="station">
+				<table class = "table table-hover">
+					<thead>
+						<tr>
+							<th> 序号 </th>
+							<th> 车站名 </th>
+							<th> 到站时间 </th>
+							<th> 里程数 </th>
+						</tr>
+					</thead>
+					{% for form in item_form %}
+					<p style="display:none">{{form.DELETE}}</p>
+					<tbody class="item">
+						<tr>
+							<td> {{form.order_of_station}}</td>
+							<td> {{form.station_name}} </td>
+							<td> {{form.arrive_time}}</td>
+							<td> {{form.distance_count}} </td>
+						<td><a class="button" href="" name="delete">删除</a></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+						<td><input type="button" value="添加站点" id="add" class="button"/></td>
+				</table>
+			</div>
+		</div>
+		<input type="submit" value="提交" />
+	</form>
+<script type="text/javascript" src='/static/modify.js'>
+</script>
+{% endblock %}
