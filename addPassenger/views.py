@@ -20,7 +20,7 @@ def get_currentUser(request):
 
 class Passenger_add(LoginRequiredMixin,TemplateView):
     #permission_required = "trainManage.add_train"
-    template_name = "passenger_add.html"
+    template_name = "addPassenger/passenger_add.html"
     success_url = "/trainManage/"
     
     def get(self, request, *args, **kwargs):   
@@ -49,7 +49,7 @@ class Passenger_add(LoginRequiredMixin,TemplateView):
                 print p_id,
                 print p_s
               
-                if len(print1)<1:
+                if len(p1)<1:
                    p1 = Passenger(passenger_name=p_name,passenger_id=p_id,student=p_s)
                    p1.save()
                    p1.users.add(currentUser)
