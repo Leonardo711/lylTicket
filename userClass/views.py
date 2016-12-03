@@ -12,7 +12,8 @@ from itsdangerous import TimestampSigner
 import base64
 
 from django.conf import settings as django_settings
-
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.sessions.models import Session
 
 
 
@@ -202,4 +203,42 @@ def passwordresetconfirm(request, token):
     #return HttpResponse("验证完成")        
         
   
-        
+
+def get_currentUser(request):
+    s = Session.objects.get(pk=request.COOKIES['sessionid'])
+    #print s.expire_date
+    #print s.get_decoded()['_auth_user_id']
+    user_id = s.get_decoded()['_auth_user_id']
+    user = User.objects.get(id=user_id)
+    return user
+
+class passwordchange(LoginRequiredMixin,TemplateView):
+
+    form_class = PasswordChangeForm
+    template_name = "password_change.html"
+
+    def get(self, request, *args, **kwargs):
+        form = PasswordChangeForm()
+        print request.GET
+        return self.render_to_response(self.get_context_data(form = form))
+
+    def post(self, request, *args, **kwargs):
+        currentUsr = get_currentUser(request)
+
+        form = self.form_class(request.POST)
+
+        if not form.is_valid():
+            return self.render_to_response(self.get_context_data(form = form))
+        else:
+            originalpassword = form.cleaned_data.get('originalpassword')
+            password = form.cleaned_data.get('password')
+            passwordagain = form.cleaned_data.get('passwordagain')
+            if currentUsr.check_password(originalpassword):
+                if password==passwordagain:
+                    currentUsr.set_password(password)
+                    currentUsr.save()
+                    return HttpResponse('修改密码成功！')
+                else:
+                    return HttpResponse('两次密码不一致!')
+            else:
+                return HttpResponse('原密码输入错误！')
