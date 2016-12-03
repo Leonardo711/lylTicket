@@ -1,9 +1,12 @@
+# -*- coding:utf-8 -*-
 from django.shortcuts import render, render_to_response
 #from django.views.generic import View
 from django.views.generic.base import TemplateView
 from .forms import *
 from trainManage.models import *
 from datetime import datetime, timedelta
+from django.contrib.auth.mixins import LoginRequiredMixin
+from collections import OrderedDict
 #from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
@@ -24,15 +27,16 @@ class ticketQuery(TemplateView):
         date =  datetime.strptime(request.POST['date'], "%m/%d/%Y")
         date = datetime.date(date)
         query = Query(startStation, endStation, date)
-        resultSet = query.search()
-
+        resultSet= query.search()
+        print resultSet
         return self.render_to_response(self.get_context_data(form=form,
                                                              startStation=startStation,
                                                              endStation=endStation,
                                                              date = date,
-                                                             resultSet=resultSet))
+                                                             resultSet=resultSet,
+                                                             ))
 
-class ticketOrder(TemplateView):
+class ticketOrder(TemplateView, LoginRequiredMixin):
     template_name = "ticketQuery/ticket_order.html"
     def post(self, request):
         # rebuild the result to a dictionary which store the result
@@ -47,14 +51,17 @@ class ticketOrder(TemplateView):
         seat_type_num = request.POST['seat_type_num']
         for i in range(1, int(seat_type_num)+1):
             seat_type_index = "seat_type_" + str(i)
-            seat_type = request.POST[seat_type_index]
-            seat_type_counter_index = seat_type + "_counter"
-            seat_type_counter = request.POST[seat_type_counter_index]
-            for j in range(1, int(seat_type_counter)+1):
-                seat_index = seat_type +"_" + str(j)
-                seat_key = request.POST[seat_index]
-                seat_key_set = seat_type_to_seat_key.setdefault(seat_type, [])
-                seat_key_set.append(seat_key)
+            try:
+                seat_type = request.POST[seat_type_index]
+                seat_type_counter_index = seat_type + "_counter"
+                seat_type_counter = request.POST[seat_type_counter_index]
+                for j in range(1, int(seat_type_counter)+1):
+                    seat_index = seat_type +"_" + str(j)
+                    seat_key = request.POST[seat_index]
+                    seat_key_set = seat_type_to_seat_key.setdefault(seat_type, [])
+                    seat_key_set.append(seat_key)
+            except:
+                pass
 
         # they are all strings , not objects
         return self.render_to_response(self.get_context_data(seat_type_to_seat_key=seat_type_to_seat_key,
@@ -80,6 +87,7 @@ class Query(object):
         for run in self.end.run_set.all():
             endSet.add(run.train_come_by)
         trainSet = startSet & endSet
+        trainStartTime = {}
         for train in trainSet:
             startRun = Run.objects.get(train_come_by= train, station_name=self.start)
             endRun = Run.objects.get(train_come_by=train, station_name=self.end)
@@ -90,6 +98,12 @@ class Query(object):
             if today< self.date or ( today==self.date and datetime.time(datetime.now()) < startRun.arrive_time): # before train arrive
             # input time must later than now
                 if  startOrder < endOrder:
+                    arrive_time = \
+                        train.run_set.get(train_come_by=train,station_name=self.start).arrive_time
+                    resultSet[train.train_id] = {'yideng':[],'erdeng':[],'shangwu':[],'ruanwo':[],
+                                                 'yingzuo':[],'yingzuo':[],'wuzuo':[], "arrive_time":arrive_time}
+                    trainStartTime[train.train_id]= \
+                        train.run_set.get(train_come_by=train,station_name=self.start).arrive_time
                     for carriage in train.carriage_set.all():
                         seatSet = carriage.seat_set.all()
                         seatSet = seatSet.filter(date=startDate)

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class PassengerForm(forms.Form):
-	order = forms.IntegerField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
+	order = forms.IntegerField(widget=forms.TextInput(attrs={'readonly':'readonly', 'value':1}))
 	passenger_name = forms.CharField()
 	passenger_id = forms.CharField()
 	student = forms.IntegerField()

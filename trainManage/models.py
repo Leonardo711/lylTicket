@@ -57,11 +57,21 @@ class Carriage(models.Model):
         carriage_key = '{:X<5}'.format(train_id) \
                    + '{:0>2}'.format(carriage_id)
         return carriage_key
+
+    seat_type_list = (
+        ('shangwu', '商务座'),
+        ('yideng', '一等座'),
+        ('erdeng', '二等座'),
+        ('ruanwo', '软卧'),
+        ('yingwo', '硬卧'),
+        ('yingzuo', '硬座'),
+        ('wuzuo','无座'),
+    )
     carriage_key = models.CharField(max_length=30, primary_key = True)
     train_id = models.ForeignKey(Train, on_delete=models.CASCADE)
     carriage_id = models.IntegerField(default=1)
     num_seat = models.IntegerField(default=0)
-    seat_type = models.CharField(max_length=10)
+    seat_type = models.CharField(max_length=10, choices = seat_type_list)
 
     def __str__(self):
         return self.carriage_key

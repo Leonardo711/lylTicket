@@ -76,6 +76,7 @@
                 <th>车次</th>
                 <th>出发站</th>
                 <th>到达站</th>
+                <th>出发时间</th>
                 <th>商务座</th>
                 <th>一等座</th>
                 <th>二等座</th>
@@ -96,22 +97,33 @@
                     <td> {{ train_id }}</td>
                     <td> {{ startStation.station_name }}</td>
                     <td> {{ endStation.station_name }}</td>
+                    <td> {{ type_seat.arrive_time |date:"H:i"}}</td>
                     <input type="hidden" value="{{train_id}}" name="train_id"/>
+                    <td> {{ type_seat.shangwu|length }}</td>
+                    <td> {{ type_seat.yideng|length }}</td>
+                    <td> {{ type_seat.erdeng|length}}</td>
+                    <td> {{ type_seat.ruanwo|length}}</td>
+                    <td> {{ type_seat.yingwo|length}}</td>
+                    <td> {{ type_seat.yingzuo|length}}</td>
+                    <td> {{ type_seat.wuzuo |length}}</td>
                     {% for type ,seatSet in type_seat.iteritems %}
-                            <td>{{ seatSet|length }}</td>
+                    <!--<td> {{ seatSet|length }}</td> -->
+                    {% ifnotequal type  "arrive_time" %}
                             {% for seat in seatSet %}
                                 <input name="{{type}}_{{forloop.counter}}" value=" {{seat.seat_key}}" type="hidden"/>
                                 <input type="hidden" value= {{forloop.counter}} name="{{type}}_counter"/>
                             {% endfor %}
+                            <input type="hidden" value="{{ type_seat.arrive_time }}" name="arrive_time"/>
                             <input type="hidden" value={{type}} name="seat_type_{{forloop.counter}}"/>
                             <input type="hidden" value={{forloop.counter}} name="seat_type_num"/>
+                    {% endifnotequal %}
                     {% endfor %}
                     <td><button type="submit" name="order" class="btn btn-primary btn-lg glyphicon glyphicon-pushpin" style="font-size:16px"><span ></span>预订 </button></td>
                     </tr>
             </form>
+        {% endfor %}
         </tbody>
         </table>
-        {% endfor %}
     </div>
     {% endif %}
 {% endblock %}    
