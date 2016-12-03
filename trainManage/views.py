@@ -142,10 +142,42 @@ class addCarriage(PermissionRequiredMixin, CreateView):
 
 def trainCreateFromFile(request):
     if request.method == "POST":
-        form = trainFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            pass
+        file = request.POST['file']
+        print type(file)
+#            num_station = run_form.total_form_count()
+#            train = form.save(commit=False)
+#            self.object=train
+#            train.num_station = num_station
+#            day_count = 0
+#            time_list = []
+#            distance_list = []
+#            print(len(run_form))
+#            for runForm in run_form:
+#                run = runForm.save(commit=False)
+#                distance_list.append(run.distance_count)
+#            train.train_type = train.train_id[0]
+#            train.distance = distance_list[-1]
+#            train.save()
+#            for runForm in run_form:
+#                run = runForm.save(commit=False)
+#                runCount = run.order_of_station
+#                #arrive_time = datetime.strptime(run.arrive_time, "%H:%M")
+#                arrive_time = run.arrive_time
+#                time_list.append(arrive_time)
+#                if(runCount != 1):
+#                    pre_arrive = time_list[runCount -1]
+#                    if arrive_time < pre_arrive:
+#                        day_count += 1
+#                run.count_over_night = day_count
+#                run.run_key = Run.generateRunKey(run.station_name.station_id, train.train_id)
+#                run.order_station = runCount
+#                print("here is no problem")
+#                run.train_come_by = train
+#                print(run.count_over_night)
+#                print(run.run_key)
+#                print(run.order_station)
+#                run.save()
     else:
-        pass
-    return HttpResponseRedirect("/trainManage/")
+        print('wrong')
+    return HttpResponseRedirect("/trainManage/create/")
 

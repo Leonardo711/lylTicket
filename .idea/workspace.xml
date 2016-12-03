@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca55bd22-20cf-4c4d-ae9d-b986cfd0cb06" name="Default" comment="k">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/trainManage/train_create.html" afterPath="$PROJECT_DIR$/templates/trainManage/train_create.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainManage/urls.py" afterPath="$PROJECT_DIR$/trainManage/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ticketQuery/ticket_query.html" afterPath="$PROJECT_DIR$/templates/ticketQuery/ticket_query.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainManage/views.py" afterPath="$PROJECT_DIR$/trainManage/views.py" />
     </list>
     <ignored path="lylTicket.iws" />
@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainManage/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="148" column="11" selection-start-line="148" selection-start-column="11" selection-end-line="148" selection-end-column="11" />
+            <state relative-caret-position="240">
+              <caret line="145" column="23" selection-start-line="145" selection-start-column="23" selection-end-line="145" selection-end-column="23" />
               <folding>
                 <element signature="e#25#60#0" expanded="true" />
                 <element signature="e#723#836#0" expanded="false" />
@@ -64,14 +64,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ticket_query.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ticket_query.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/ticketQuery/ticket_query.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+            <state relative-caret-position="150">
+              <caret line="59" column="21" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
               <folding>
+                <element signature="n#style#0;n#span#0;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#2;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#4;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#td#11;n#tr#0;n#form#0;n#tbody#0;n#table#0;n#div#2;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/userClass/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/userClass/tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,8 +113,8 @@
       <file leaf-file-name="train_create.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/trainManage/train_create.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
+            <state relative-caret-position="361">
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -114,29 +138,6 @@
             <state relative-caret-position="195">
               <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/addPassenger/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="8" column="92" selection-start-line="8" selection-start-column="92" selection-end-line="8" selection-end-column="92" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ticketQuery/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="38" column="49" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
-              <folding>
-                <element signature="e#23#78#0" expanded="true" />
-                <element signature="e#3515#5843#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -196,13 +197,13 @@
         <option value="$PROJECT_DIR$/addPassenger/forms.py" />
         <option value="$PROJECT_DIR$/lylTicket/views.py" />
         <option value="$PROJECT_DIR$/trainManage/models.py" />
-        <option value="$PROJECT_DIR$/templates/ticketQuery/ticket_query.html" />
         <option value="$PROJECT_DIR$/templates/ticketQuery/ticket_order.html" />
         <option value="$PROJECT_DIR$/ticketQuery/views.py" />
         <option value="$PROJECT_DIR$/trainManage/forms.py" />
-        <option value="$PROJECT_DIR$/templates/trainManage/train_create.html" />
         <option value="$PROJECT_DIR$/trainManage/urls.py" />
+        <option value="$PROJECT_DIR$/templates/trainManage/train_create.html" />
         <option value="$PROJECT_DIR$/trainManage/views.py" />
+        <option value="$PROJECT_DIR$/templates/ticketQuery/ticket_query.html" />
       </list>
     </option>
   </component>
@@ -285,6 +286,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="userClass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lylTicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lylTicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="trainManage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -332,6 +347,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="trainManage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lylTicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lylTicket" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ticketQuery" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -565,7 +598,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/users/templates/users/activation_email_subject.html" />
     <entry file="file://$PROJECT_DIR$/users/templates/users/login.html" />
     <entry file="file://$PROJECT_DIR$/users/templates/users/logout.html" />
     <entry file="file://$PROJECT_DIR$/users/templates/users/password_reset_complete.html" />
@@ -584,13 +616,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="95" column="4" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userClass/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -817,6 +842,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/trainManage/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-81">
+          <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userClass/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userClass/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ticketQuery/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -824,24 +873,6 @@
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ticketQuery/ticket_query.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#td#11;n#tr#0;n#form#0;n#tbody#0;n#table#0;n#div#2;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/trainManage/train_create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -855,24 +886,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trainManage/models.py">
+    <entry file="file://$PROJECT_DIR$/templates/trainManage/train_create.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-81">
-          <caret line="67" column="14" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+        <state relative-caret-position="361">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/trainManage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="148" column="11" selection-start-line="148" selection-start-column="11" selection-end-line="148" selection-end-column="11" />
+        <state relative-caret-position="240">
+          <caret line="145" column="23" selection-start-line="145" selection-start-column="23" selection-end-line="145" selection-end-column="23" />
           <folding>
             <element signature="e#25#60#0" expanded="true" />
             <element signature="e#723#836#0" expanded="false" />
             <element signature="e#3505#3654#0" expanded="false" />
             <element signature="e#3717#3874#0" expanded="false" />
             <element signature="e#3937#5938#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ticketQuery/ticket_query.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="59" column="21" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#2;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#4;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#form#0;n#div#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#td#11;n#tr#0;n#form#0;n#tbody#0;n#table#0;n#div#2;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
