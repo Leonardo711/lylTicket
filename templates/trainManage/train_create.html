@@ -116,7 +116,7 @@
 
     <div class="container"  id="table_title">
         <span class="glyphicon glyphicon-folder-open">上传文件</span>
-        <span id="title_right"><form method="post" action="/trainManage/trainCreateFromFile/" >{% csrf_token %}
+        <span id="title_right"><form method="post" action="/trainManage/trainCreateFromFile/" enctype="multipart/form-data">{% csrf_token %}
     {{ trainFileForm.file }}</span>
     </div>
 

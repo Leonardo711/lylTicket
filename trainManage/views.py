@@ -68,7 +68,6 @@ class train_create(PermissionRequiredMixin, CreateView):
                         day_count += 1
                 run.count_over_night = day_count
                 run.run_key = Run.generateRunKey(run.station_name.station_id, train.train_id)
-                run.order_station = runCount
                 print("here is no problem")
                 run.train_come_by = train
                 print(run.count_over_night)
@@ -142,42 +141,82 @@ class addCarriage(PermissionRequiredMixin, CreateView):
 
 def trainCreateFromFile(request):
     if request.method == "POST":
-        file = request.POST['file']
-        print type(file)
-#            num_station = run_form.total_form_count()
-#            train = form.save(commit=False)
-#            self.object=train
-#            train.num_station = num_station
-#            day_count = 0
-#            time_list = []
-#            distance_list = []
-#            print(len(run_form))
-#            for runForm in run_form:
-#                run = runForm.save(commit=False)
-#                distance_list.append(run.distance_count)
-#            train.train_type = train.train_id[0]
-#            train.distance = distance_list[-1]
-#            train.save()
-#            for runForm in run_form:
-#                run = runForm.save(commit=False)
-#                runCount = run.order_of_station
-#                #arrive_time = datetime.strptime(run.arrive_time, "%H:%M")
-#                arrive_time = run.arrive_time
-#                time_list.append(arrive_time)
-#                if(runCount != 1):
-#                    pre_arrive = time_list[runCount -1]
-#                    if arrive_time < pre_arrive:
-#                        day_count += 1
-#                run.count_over_night = day_count
-#                run.run_key = Run.generateRunKey(run.station_name.station_id, train.train_id)
-#                run.order_station = runCount
-#                print("here is no problem")
-#                run.train_come_by = train
-#                print(run.count_over_night)
-#                print(run.run_key)
-#                print(run.order_station)
-#                run.save()
+        file = request.FILES['file']
+        ex_order = 0
+        distance_list = []
+        station_list = []
+        arrive_time_list = []
+        ex_train = ''
+        for line in  request.FILES['file']:
+            try:
+                train_id, order, station_name, arrive_time, distance = line.strip().split("\t")
+            except:
+                return HttpResponse("Wrong file")
+            order = int(order)
+            distance = float(distance)
+            if  ex_order < order:
+                ex_train = train_id
+                ex_order = order
+                distance_list.append(distance)
+                try:
+                    station_list.append(Station.objects.get(station_name = station_name))
+                except:
+                    print station_name
+                    return HttpResponseRedirect("/")
+                arrive_time_list.append(arrive_time)
+            else:
+                train = Train()
+                train.distance = distance_list[-1]
+                train.train_id = ex_train
+                train.train_type = train_id[0]
+                train.num_station = ex_order
+                train.save()
+                day_count  = 0
+                for i in range(ex_order):
+                    run = Run()
+                    runCount = i+1;
+                    if(runCount != 1):
+                        pre_arrive = arrive_time_list[runCount -1]
+                        if arrive_time < pre_arrive:
+                            day_count += 1
+                    run.count_over_night = day_count
+                    run.run_key = Run.generateRunKey(station_list[i].station_id, train.train_id)
+                    run.order_of_station = runCount
+                    run.station_name = station_list[i]
+                    run.arrive_time = arrive_time_list[i]
+                    run.distance_count = distance_list[i]
+                    run.train_come_by = train
+                    run.save()
+                ex_order = 1
+                distance_list=[distance]
+                station_list=[Station.objects.get(station_name = station_name)]
+                arrive_time_list = [arrive_time]
+                run.save()
+        train = Train()
+        train.distance = distance[-1]
+        train.train_id = ex_train
+        train.train_type = train_id[0]
+        train.num_station = ex_order
+        train.save()
+        day_count  = 0
+        for i in range(ex_order):
+            run = Run()
+            runCount = i+1;
+            if(runCount != 1):
+                pre_arrive = arrive_time_list[runCount -1]
+            if arrive_time < pre_arrive:
+                day_count += 1
+            run.count_over_night = day_count
+            run.run_key = Run.generateRunKey(station_list[i].station_id, train.train_id)
+            run.order_station = runCount
+            run.train_come_by = train
+            run.save()
     else:
         print('wrong')
     return HttpResponseRedirect("/trainManage/create/")
 
+def load(file):
+    for line in (open("station_city_set.txt", 'r')):
+        station_id, station_name, station_city = line.strip().split("\t")
+        station = Station.objects.create(station_id=int(station_id), station_name=station_name,station_city=station_city)
+        station.save()

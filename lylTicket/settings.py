@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'lylTicket.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "lylTicket1",
+        'NAME': "lylTicket",
         'USER': "inplus",
         'PASSWORD':'labd203',
         'HOST':'172.18.181.134',
