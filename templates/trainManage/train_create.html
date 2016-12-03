@@ -55,16 +55,19 @@
 
         float:right;
     } 
-
+    #rightbutton2{     
+        margin-top: 10px;
+        float:right;
+    } 
+    #title_right{     
+        float:right;
+    } 
     </style>
                         
 </head>     
     <script src="/static/js/jquery-2.0.3.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-<form method="post" action="/trainManage/trainCreateFromFile/" >{% csrf_token %}
-    {{ trainFileForm.file }}
-    <button type="submit">提交</button>
-</form>
+
 <form method="post">{% csrf_token %}
 	<div class="container"  id="table_title">
         <span class="glyphicon glyphicon-road">列车编号</span>
@@ -110,6 +113,17 @@
         <div class="" id="rightbutton"><button type="submit" class="btn btn-warning btn-lg" style="font-size:16px" >确认提交<span class="glyphicon glyphicon-ok" ></span></button></div>   
     </div>
 </form>
+
+    <div class="container"  id="table_title">
+        <span class="glyphicon glyphicon-folder-open">上传文件</span>
+        <span id="title_right"><form method="post" action="/trainManage/trainCreateFromFile/" >{% csrf_token %}
+    {{ trainFileForm.file }}</span>
+    </div>
+
+    <div class="container" id="search_result"> 
+        <div class="" id="rightbutton2"><button type="submit" class="btn btn-lg" style="font-size:16px" >提交<span class="glyphicon glyphicon-ok" ></span></button></div>   
+    </div>
+
 
 <script type="text/javascript" src='/static/modify.js'>
 </script>
