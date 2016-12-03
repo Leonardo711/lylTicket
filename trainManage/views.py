@@ -140,6 +140,12 @@ class addCarriage(PermissionRequiredMixin, CreateView):
                 self.get_context_data(form=self.object,
                                       item_form=carriage_form))
 
-def addtrainFromFile(request):
-    return HttpResponseRedirect("/")
+def trainCreateFromFile(request):
+    if request.method == "POST":
+        form = trainFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            pass
+    else:
+        pass
+    return HttpResponseRedirect("/trainManage/")
 
