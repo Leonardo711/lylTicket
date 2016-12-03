@@ -17,12 +17,12 @@ timeSpan = 3 # 卖票的时间跨度
 class train_ListView(PermissionRequiredMixin, ListView):
     permission_required = "trainManage.add_train"
     model = Train
-    template_name = 'trainManage.train_list.html'
+    template_name = 'trainManage/train_list.html'
 
 class train_create(PermissionRequiredMixin, CreateView):
     permission_required = "trainManage.add_train"
     model = Train
-    template_name = "trainManage.train_create.html"
+    template_name = "trainManage/train_create.html"
     success_url = "/trainManage/"
     form_class = TrainForm
 

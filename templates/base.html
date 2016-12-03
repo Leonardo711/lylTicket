@@ -47,14 +47,14 @@
             <li id="welcome">欢迎,</li>  
             <li><a href="#">{{user.username}}</a></li>
             <li id="welcome">|</li>  
-            <li><a href="#">退出登录</a></li>   <!--sign out-->
+            <li><a href="/accounts/logout">退出登录</a></li>   <!--sign out-->
         </ul>
         {% else %}
          <ul class="nav nav-pills navbar-right" id="right">         
             <li id="welcome">您好,请</li>  
             <li><a href="/accounts/login">登录</a></li>
             <li id="welcome">|</li>  
-            <li><a href="/accounts/logout">注册</a></li>
+            <li><a href="/accounts/signup">注册</a></li>
         </ul>
         {% endif %}
     </div>

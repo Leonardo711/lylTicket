@@ -61,9 +61,8 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'lylTicket.urls'
-
-TEMPLATE_PATH = (
-    os.path.join(BASE_DIR,'templates')
+TEMPLATE_PATH = os.path.join(
+    BASE_DIR, 'templates'
 )
 TEMPLATES = [
     {
@@ -125,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

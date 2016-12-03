@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 # Create your views here.
 class ticketQuery(TemplateView):
     form_class = TicketQueryForm
-    template_name = "ticketQuery.ticket_query.html"
+    template_name = "ticketQuery/ticket_query.html"
     def get(self, request, *args, **kwargs):
         form = TicketQueryForm()
         return self.render_to_response(self.get_context_data(form=form))
@@ -33,7 +33,7 @@ class ticketQuery(TemplateView):
                                                              resultSet=resultSet))
 
 class ticketOrder(TemplateView):
-    template_name = "ticketQuery.ticket_order.html"
+    template_name = "ticketQuery/ticket_order.html"
     def post(self, request):
         # rebuild the result to a dictionary which store the result
         seat_type_to_seat_key = {}
