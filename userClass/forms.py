@@ -28,3 +28,7 @@ class PasswordResetForm2(forms.Form):
     password = forms.CharField(label = "密码", widget=forms.PasswordInput)
     passwordagain = forms.CharField(label = "确认密码", widget=forms.PasswordInput)
 
+class PasswordChangeForm(forms.Form):
+    originalpassword = forms.CharField(label = "原密码", widget=forms.PasswordInput)
+    password = forms.CharField(label = "密码", widget=forms.PasswordInput)
+    passwordagain = forms.CharField(label = "确认密码", widget=forms.PasswordInput)

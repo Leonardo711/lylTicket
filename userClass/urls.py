@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^logout/$', logout, {'template_name': 'logout.html'}, name="user_logout"),
     url(r'^password_reset/$',passwordreset.as_view(),name="password_reset"),
     url(r'^password_reset_confirm/(?P<token>\w+.[-_\w]*\w+.[-_\w]*\w+)$',passwordresetconfirm,name="password_reset_confirm"),
+    url(r'^password_change/$',passwordchange.as_view(),name="password_change"),
     #url(r'^register/$', register, name='users_register'),
     #url(r'^register/closed/$', registration_closed, name='users_registration_closed'),
     #url(r'^register/complete/$', registratiomplete, name='users_registration_complete'),
