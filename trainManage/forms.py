@@ -13,6 +13,8 @@ class TrainForm(forms.ModelForm):
                 'train_id': forms.TextInput(attrs={'class':'form-control'}),
                 }
 
+class trainFileForm(forms.Form):
+    file = forms.FileField(widget=forms.FileInput())
 
 #class RunForm(forms.ModelForm):
 #    station_name = forms.CharField(max_length=20)

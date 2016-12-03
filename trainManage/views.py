@@ -26,12 +26,14 @@ class train_create(PermissionRequiredMixin, CreateView):
     success_url = "/trainManage/"
     form_class = TrainForm
 
+
     def get(self, request, *args, **kwargs):
         self.object = None
         form_class = self.get_form_class()
         form =self.get_form(form_class)
+        fileForm = trainFileForm()
         run_form = RunForm_stationSet()
-        return self.render_to_response(self.get_context_data(form=form, item_form=run_form))
+        return self.render_to_response(self.get_context_data(form=form, item_form=run_form, trainFileForm=trainFileForm))
 
     def post(self, request, *args, **kwargs):
         print(type(self.request.POST))
@@ -138,4 +140,6 @@ class addCarriage(PermissionRequiredMixin, CreateView):
                 self.get_context_data(form=self.object,
                                       item_form=carriage_form))
 
+def addtrainFromFile(request):
+    return HttpResponseRedirect("/")
 

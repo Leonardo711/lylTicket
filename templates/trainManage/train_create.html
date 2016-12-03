@@ -61,7 +61,9 @@
 </head>     
     <script src="/static/js/jquery-2.0.3.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-
+<form method="post" action="/trainManage/createFromFile/" >{% csrf_token %}
+    {{ trainFileForm.as_p }}
+</form>
 <form method="post">{% csrf_token %}
 	<div class="container"  id="table_title">
         <span class="glyphicon glyphicon-road">列车编号</span>
