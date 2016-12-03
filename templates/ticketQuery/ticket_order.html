@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base1.html" %}
 
 {% block content %}
 <html lang="zh-CN">
@@ -114,7 +114,12 @@
                         <form class="bs-example bs-example-form" role="form">
                         <tr id="table_content">
                             <td> <input type="text" class="form-control" placeholder=""> </td>
-                            <td> <input type="text" class="form-control" placeholder=""> </td>
+                            <td> <select>
+                                <option value="business">商务座</option>
+                                <option value="first">一等座</option>
+                                <option value="second">二等座</option>
+                                </select> 
+                            </td>
                             <td> <input type="text" class="form-control" placeholder=""> </td>
                             <td> <input type="text" class="form-control" placeholder=""> </td>
                             <td> <input type="text" class="form-control" placeholder=""> </td>
