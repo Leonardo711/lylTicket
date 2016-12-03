@@ -2,9 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca55bd22-20cf-4c4d-ae9d-b986cfd0cb06" name="Default" comment="k">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/trainManage/base.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/forms.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/urls.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/addPassenger/templates/base.html" afterPath="$PROJECT_DIR$/templates/addPassenger/base.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/addPassenger/templates/passenger_add.html" afterPath="$PROJECT_DIR$/templates/addPassenger/passenger_add.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/addPassenger/templates/train_create.html" afterPath="$PROJECT_DIR$/templates/addPassenger/train_create.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/add_new_contacts.html" afterPath="$PROJECT_DIR$/templates/unknown/add_new_contacts.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/base1.html" afterPath="$PROJECT_DIR$/templates/unknown/base1.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/information.html" afterPath="$PROJECT_DIR$/templates/unknown/information.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/information_edit.html" afterPath="$PROJECT_DIR$/templates/unknown/information_edit.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/order_query.html" afterPath="$PROJECT_DIR$/templates/unknown/order_query.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/password_reset.html" afterPath="$PROJECT_DIR$/templates/unknown/password_reset.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/password_reset_confirm.html" afterPath="$PROJECT_DIR$/templates/unknown/password_reset_confirm.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resetEmailSended.html" afterPath="$PROJECT_DIR$/templates/unknown/resetEmailSended.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ticketQuery/templates/base1.html" afterPath="$PROJECT_DIR$/templates/ticketQuery/base1.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ticketQuery/templates/ticket_buy.html" afterPath="$PROJECT_DIR$/templates/ticketQuery/ticket_buy.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ticketQuery/templates/ticket_order.html" afterPath="$PROJECT_DIR$/templates/ticketQuery/ticket_order.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ticketQuery/templates/ticket_query.html" afterPath="$PROJECT_DIR$/templates/ticketQuery/ticket_query.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/trainManage/templates/addCarriage.html" afterPath="$PROJECT_DIR$/templates/trainManage/addCarriage.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/trainManage/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/trainManage/templates/train_confirm_delete.html" afterPath="$PROJECT_DIR$/templates/trainManage/train_confirm_delete.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/trainManage/templates/train_create.html" afterPath="$PROJECT_DIR$/templates/trainManage/train_create.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/trainManage/templates/train_detail.html" afterPath="$PROJECT_DIR$/templates/trainManage/train_detail.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/trainManage/templates/train_list.html" afterPath="$PROJECT_DIR$/templates/trainManage/train_list.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/user_contacts.html" afterPath="$PROJECT_DIR$/templates/unknown/user_contacts.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/userClass/templates/signup.html" afterPath="$PROJECT_DIR$/userClass/templates/signup.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/userClass/views.py" afterPath="$PROJECT_DIR$/userClass/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lylTicket/settings.py" afterPath="$PROJECT_DIR$/lylTicket/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ticketQuery/views.py" afterPath="$PROJECT_DIR$/ticketQuery/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainManage/views.py" afterPath="$PROJECT_DIR$/trainManage/views.py" />
     </list>
     <ignored path="lylTicket.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,20 +56,18 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userClass/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="0">
               <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userClass/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="67" column="26" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
+              <caret line="67" column="19" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
               <folding>
                 <element signature="e#22#57#0" expanded="true" />
               </folding>
@@ -53,11 +78,21 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainManage/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1645">
-              <caret line="125" column="4" selection-start-line="125" selection-start-column="4" selection-end-line="125" selection-end-column="4" />
+            <state relative-caret-position="285">
+              <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
               <folding>
                 <element signature="e#25#60#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,9 +110,21 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lylTicket/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2220">
-              <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
+            <state relative-caret-position="300">
+              <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ticketQuery/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,7 +132,7 @@
       <file leaf-file-name="signup.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userClass/templates/signup.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="780">
               <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -156,7 +203,6 @@
         <option value="$PROJECT_DIR$/ticketQuery/urls.py" />
         <option value="$PROJECT_DIR$/ticketQuery/templates/ticket_query.html" />
         <option value="$PROJECT_DIR$/ticketQuery/templates/ticket_order.html" />
-        <option value="$PROJECT_DIR$/ticketQuery/views.py" />
         <option value="$PROJECT_DIR$/trainManage/models.py" />
         <option value="$PROJECT_DIR$/lylTicket/urls.py" />
         <option value="$PROJECT_DIR$/userClass/models.py" />
@@ -168,10 +214,13 @@
         <option value="$PROJECT_DIR$/userClass/templates/signin.html" />
         <option value="$PROJECT_DIR$/userClass/urls.py" />
         <option value="$PROJECT_DIR$/userClass/templates/signUpSuccess.html" />
-        <option value="$PROJECT_DIR$/lylTicket/settings.py" />
-        <option value="$PROJECT_DIR$/trainManage/views.py" />
         <option value="$PROJECT_DIR$/userClass/templates/signup.html" />
         <option value="$PROJECT_DIR$/userClass/views.py" />
+        <option value="$PROJECT_DIR$/lylTicket/settings.py" />
+        <option value="$PROJECT_DIR$/templates/unknown/urls.py" />
+        <option value="$PROJECT_DIR$/ticketQuery/views.py" />
+        <option value="$PROJECT_DIR$/trainManage/views.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
       </list>
     </option>
   </component>
@@ -225,7 +274,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -255,7 +303,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="userClass" />
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -269,16 +317,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="userClass" />
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="trainManage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,16 +337,18 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/static/js" />
-      <recent name="$PROJECT_DIR$/trainManage/templates" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/userClass/templates" />
       <recent name="$PROJECT_DIR$/static/js" />
       <recent name="$PROJECT_DIR$/static/css" />
-      <recent name="$PROJECT_DIR$/loginTemplate/css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/unknown" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/static/js" />
+      <recent name="$PROJECT_DIR$/trainManage/templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -454,7 +505,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31484374" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -499,34 +550,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/trainManage/templates/train_create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainManage/templates/train_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trainManage/templates/train_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ticketQuery/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/trainManage/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -602,14 +625,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ticketQuery/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ticketQuery/templates/ticket_query.html">
+    <entry file="file://$PROJECT_DIR$/templates/ticketQuery/ticket_query.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
@@ -646,11 +662,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/userClass/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="0">
           <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -658,14 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lylTicket/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -690,7 +696,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/userClass/templates/signup.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="780">
           <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -701,23 +707,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/userClass/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="67" column="19" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
+          <folding>
+            <element signature="e#22#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lylTicket/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/unknown/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/unknown/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/unknown/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2435">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ticketQuery/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/trainManage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1645">
-          <caret line="125" column="4" selection-start-line="125" selection-start-column="4" selection-end-line="125" selection-end-column="4" />
+        <state relative-caret-position="285">
+          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
           <folding>
             <element signature="e#25#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/userClass/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="67" column="26" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
-          <folding>
-            <element signature="e#22#57#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
