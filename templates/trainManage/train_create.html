@@ -62,7 +62,8 @@
     <script src="/static/js/jquery-2.0.3.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
 <form method="post" action="/trainManage/trainCreateFromFile/" >{% csrf_token %}
-    {{ trainFileForm.as_p }}
+    {{ trainFileForm.file }}
+    <button type="submit">提交</button>
 </form>
 <form method="post">{% csrf_token %}
 	<div class="container"  id="table_title">
