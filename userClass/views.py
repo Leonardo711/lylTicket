@@ -15,7 +15,7 @@ from django.conf import settings as django_settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.sessions.models import Session
 
-
+#from ticketQuery.models import Order
 
 
 
@@ -242,3 +242,21 @@ class passwordchange(LoginRequiredMixin,TemplateView):
                     return HttpResponse('两次密码不一致!')
             else:
                 return HttpResponse('原密码输入错误！')
+
+
+class PersonInfo(LoginRequiredMixin,TemplateView):
+    form_class = PassengerInfoForm
+    template_name = "information.html"  
+
+    def get(self, request, *args, **kwargs):
+        pinfoformset = PassengerInfoFormSet()
+        form_list = []
+        user = get_currentUser(request)
+        #order_set = Order.objects.filter(user_name=user.email)
+        order_set = []
+        for p in user.passenger_set.all():
+            form_list.append(p)
+            print p.passenger_name
+
+        
+        return self.render_to_response(self.get_context_data(object_list = form_list,order_list=order_set))
