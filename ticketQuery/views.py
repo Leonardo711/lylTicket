@@ -8,6 +8,20 @@ from datetime import datetime, timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin
 from collections import OrderedDict
 #from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.models import User,Group
+from django.contrib.sessions.models import Session
+from django.http import HttpResponse, HttpResponseRedirect
+
+def get_currentUser(request):
+    s = Session.objects.get(pk=request.COOKIES['sessionid'])
+    #print s.expire_date
+    #print s.get_decoded()['_auth_user_id']
+    user_id = s.get_decoded()['_auth_user_id']
+    user = User.objects.get(id=user_id)
+    return user
+
+
+
 
 # Create your views here.
 class ticketQuery(TemplateView):
@@ -42,6 +56,7 @@ class ticketOrder(TemplateView, LoginRequiredMixin):
         # rebuild the result to a dictionary which store the result
         seat_type_to_seat_key = {}
         train_id = request.POST['train_id']
+        print "收到提交！"
         start = request.POST['start']
         end = request.POST['end']
         date = request.POST['date']
@@ -63,12 +78,19 @@ class ticketOrder(TemplateView, LoginRequiredMixin):
             except:
                 pass
 
+      
+        user = get_currentUser(request)
+        passenger_set = user.passenger_set.all()
+        for p in passenger_set:
+            print p.passenger_name
+        #print seat_type_to_seat_key
+
         # they are all strings , not objects
         return self.render_to_response(self.get_context_data(seat_type_to_seat_key=seat_type_to_seat_key,
                                                              train_id = train_id,
                                                              date=date,
                                                              start=start,
-                                                             end = end))
+                                                             end = end,passenger_set=passenger_set))
 
 # This is a class for search process
 class Query(object):
@@ -113,3 +135,31 @@ class Query(object):
                                 seat_result = type_seat.setdefault(seat.carriage.seat_type,[])
                                 seat_result.append(seat)
         return resultSet
+
+
+class ticketOrderConfirm(TemplateView, LoginRequiredMixin):
+    template_name = "ticketQuery/ticket_order_confirm.html"
+    def post(self, request):
+        order_id = '111111'
+        passenger_name = request.POST['passenger_name']
+        passenger_id = request.POST['passenger_id']
+        passenger_tel = request.POST['tel']
+        start_time = request.POST['time']
+        train_id = request.POST['train_id']
+        start_station = request.POST['start']
+        end_station = request.POST['end']
+        print order_id,train_id,passenger_name,passenger_id,passenger_tel,start_time,start_station,end_station
+       # info_dict = {'order_id':order_id,'passenger_name':passenger_name,'passenger_id',passenger_id,'passenger_tel':passenger_tel,'start_time':start_time,'train_id':train_id,'start_station':start_station,'end_station':end_station}
+        info_dict = {}
+        info_dict['order_id'] = order_id
+        info_dict['passenger_name'] = passenger_name
+        info_dict['passenger_id'] = passenger_id
+        info_dict['passenger_tel'] = passenger_tel
+        info_dict['start_time'] = start_time
+        info_dict['train_id'] = train_id
+        info_dict['start_station'] = start_station
+        info_dict['end_station'] = end_station
+        info_dict_list = []
+        info_dict_list.append(info_dict)
+        # they are all strings , not objects
+        return render_to_response(self.get_context_data(obj = info_dict))
