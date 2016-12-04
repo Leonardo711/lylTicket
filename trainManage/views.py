@@ -154,6 +154,7 @@ def trainCreateFromFile(request):
                 return HttpResponse("Wrong file")
             order = int(order)
             distance = float(distance)
+            day_count  = 0
             if  ex_order < order:
                 ex_train = train_id
                 ex_order = order
@@ -171,7 +172,6 @@ def trainCreateFromFile(request):
                 train.train_type = train_id[0]
                 train.num_station = ex_order
                 train.save()
-                day_count  = 0
                 for i in range(ex_order):
                     run = Run()
                     runCount = i+1;
@@ -191,6 +191,7 @@ def trainCreateFromFile(request):
                 distance_list=[distance]
                 station_list=[Station.objects.get(station_name = station_name)]
                 arrive_time_list = [arrive_time]
+                day_count = 0
                 run.save()
         train = Train()
         train.distance = distance[-1]
