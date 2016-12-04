@@ -83,13 +83,13 @@ class train_create(PermissionRequiredMixin, CreateView):
 
 
 class train_detail(PermissionRequiredMixin,DetailView):
-    permission_required = "trainManage/add_train"
+    permission_required = "trainManage.add_train"
     model = Train
     template_name = "trainManage/train_detail.html"
     context_object_name = "train"
 
 class train_delete(PermissionRequiredMixin, DeleteView):
-    permission_required = "trainManage/add_train"
+    permission_required = "trainManage.add_train"
     model = Train
     template_name = "trainManage/train_confirm_delete.html"
     success_url = '/trainManage/'
