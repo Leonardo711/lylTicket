@@ -194,7 +194,7 @@ def trainCreateFromFile(request):
                 day_count = 0
                 run.save()
         train = Train()
-        train.distance = distance[-1]
+        train.distance = distance_list[-1]
         train.train_id = ex_train
         train.train_type = train_id[0]
         train.num_station = ex_order
