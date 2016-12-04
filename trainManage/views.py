@@ -209,15 +209,18 @@ def trainCreateFromFile(request):
                 day_count += 1
             run.count_over_night = day_count
             run.run_key = Run.generateRunKey(station_list[i].station_id, train.train_id)
-            run.order_station = runCount
+            run.order_of_station = runCount
+            run.station_name = station_list[i]
+            run.arrive_time = arrive_time_list[i]
+            run.distance_count = distance_list[i]
             run.train_come_by = train
             run.save()
     else:
         print('wrong')
     return HttpResponseRedirect("/trainManage/create/")
 
-def load(file):
-    for line in (open("station_city_set.txt", 'r')):
+def load(station_file):
+    for line in (open(station_file, 'r')):
         station_id, station_name, station_city = line.strip().split("\t")
         station = Station.objects.create(station_id=int(station_id), station_name=station_name,station_city=station_city)
         station.save()
