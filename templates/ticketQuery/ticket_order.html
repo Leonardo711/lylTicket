@@ -64,7 +64,25 @@
         text-align: right;
     } 
     </style>
-                        
+<script type="text/javascript" >
+    function addPassenger(checkbox_name,name)
+    {   var oBox= document.getElementById(checkbox_name);
+        //oBox.checked = true;
+        var addButton = document.getElementById("add");
+       
+        if(oBox.checked)
+        {
+            
+            alert(name);
+            addButton.click();
+        }
+        else
+        {
+
+           
+        }
+    }
+</script> 
 </head>     
     <script src="/static/js/jquery-2.0.3.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
@@ -91,13 +109,34 @@
         </form>
     </div>
 
-    <div class="" id="passenger_info">
+    <br></br>
+
+    <div class="container" id="train_info" >
+        <div class="" id="train_info_title">
+            <span class="glyphicon glyphicon-user">乘客信息</span>
+        </div>
         <form method="post">{% csrf_token %}
+            <div class="" id="train_info_ticket">
+                {% for p in passenger_set %}              
+                    <span><input id="{{p.passenger_name}}" type="checkbox" value="" onclick="addPassenger('{{p.passenger_name}}','{{p.passenger_name}}')" />&nbsp{{p.passenger_name}} &nbsp&nbsp</span>
+                        
+                {% endfor %}
+
+            </div>
+        </form>
+    </div>
+
+   
+   <br></br>
+
+
+    <div class="" id="passenger_info">
+        <form method="post" action ='./orderconfirm/'>{% csrf_token %}
             <div class=""  id="passenger_info_title">
                 <span class="glyphicon glyphicon-user">乘客信息</span>
             </div>
             <div class="">
-                <table class = "table table-striped table-bordered table-hover">
+                <table  class = "table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
                             <th> 序号 </th>
@@ -113,23 +152,30 @@
                     <tbody class="item">
                         <form class="bs-example bs-example-form" role="form">
                         <tr id="table_content">
-                            <td> <input type="text" class="form-control" placeholder=""> </td>
-                            <td> <select>
+                            <div>
+                            <input name="train_id" value="{{train_id}}" type="hidden"/> 
+                            <input name="start" value="{{start}}"  type="hidden"/> 
+                            <input name="end" value="{{end}}"  type="hidden"/> 
+                            <input name="time" value="{{date.year}}年{{date.month}}月{{date.day}}日" type="hidden"/>
+                            </div>
+
+                            <td> <input name="xuhao" type="text" class="form-control" placeholder="" readonly="1" value="1" ></td>
+                            <td> <select name="seat_type" id = "seattype">
                                 <option value="business">商务座</option>
                                 <option value="first">一等座</option>
-                                <option value="second">二等座</option>
+                                <option value="second" selected="1"  >二等座</option>
                                 </select> 
                             </td>
-                            <td> <input type="text" class="form-control" placeholder=""> </td>
-                            <td> <input type="text" class="form-control" placeholder=""> </td>
-                            <td> <input type="text" class="form-control" placeholder=""> </td>
-                            <td> <input type="text" class="form-control" placeholder=""> </td>
+                            <td> <input name="student" type="text" class="form-control" placeholder=""> </td>
+                            <td> <input name="passenger_name" type="text" class="form-control" placeholder=""> </td>
+                            <td> <input name="passenger_id" type="text" class="form-control" placeholder=""> </td>
+                            <td> <input name="tel" type="text" class="form-control" placeholder=""> </td>
                             <td><button type="button" name="delete" class="btn btn-danger " style="font-size:16px">&nbsp删除&nbsp<span class="glyphicon glyphicon-remove"></span></button></td>
                         </tr>
                         </form>
                     </tbody>        
                 </table>
-                <button type="button" id="add" class="btn btn-info glyphicon glyphicon-plus" style="font-size:16px">添加乘客</button>
+                <button type="button" id="add"  class="btn btn-info glyphicon glyphicon-plus" style="font-size:16px">添加乘客</button>
             </div>
             {% for type, seatSet in seat_type_to_seat_key.iteritems %}
                 <div>
@@ -148,6 +194,6 @@
         </form>
     </div>
 
-<script type="text/javascript" src='/static/modify.js'>
+<script type="text/javascript" src='/static/modify4.js'>
 </script>
 {% endblock %}
