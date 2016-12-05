@@ -65,7 +65,6 @@ class Carriage(models.Model):
         ('ruanwo', '软卧'),
         ('yingwo', '硬卧'),
         ('yingzuo', '硬座'),
-        ('wuzuo','无座'),
     )
     carriage_key = models.CharField(max_length=30, primary_key = True)
     train_id = models.ForeignKey(Train, on_delete=models.CASCADE)

@@ -83,7 +83,6 @@
                 <th>软卧</th>
                 <th>硬卧</th>
                 <th>硬座</th>
-                <th>无座</th>
                 <th>备注</th>
             </tr>
         </thead>
@@ -105,7 +104,6 @@
                     <td> {{ type_seat.ruanwo|length}}</td>
                     <td> {{ type_seat.yingwo|length}}</td>
                     <td> {{ type_seat.yingzuo|length}}</td>
-                    <td> {{ type_seat.wuzuo |length}}</td>
                     {% for type ,seatSet in type_seat.iteritems %}
                     <!--<td> {{ seatSet|length }}</td> -->
                     {% ifnotequal type  "arrive_time" %}

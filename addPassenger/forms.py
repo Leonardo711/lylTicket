@@ -7,12 +7,14 @@ from django.contrib.auth.models import User
 
 class PassengerForm(forms.Form):
 	order = forms.IntegerField(widget=forms.TextInput(attrs={'readonly':'readonly', 'value':1}))
-	passenger_name = forms.CharField()
-	passenger_id = forms.CharField()
+	seat_type = forms.CharField()
 	student = forms.IntegerField()
+	name = forms.CharField()
+	id = forms.CharField()
+	phone = forms.CharField()
 
 	
-PassengerFormSet = formset_factory(PassengerForm,max_num=10)
+PassengerFormSet = formset_factory(PassengerForm,max_num=10,extra=1)
 
 
 '''

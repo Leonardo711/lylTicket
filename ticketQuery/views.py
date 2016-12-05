@@ -56,12 +56,18 @@ class ticketOrder(TemplateView, LoginRequiredMixin):
         # rebuild the result to a dictionary which store the result
         seat_type_to_seat_key = {}
         train_id = request.POST['train_id']
-        print "收到提交！"
+        seat_type_dict = {'shangwu': '商务座',
+        'yideng': '一等座',
+        'erdeng': '二等座',
+        'ruanwo': '软卧',
+        'yingwo': '硬卧',
+        'yingzuo': '硬座',
+        }
         start = request.POST['start']
         end = request.POST['end']
         date = request.POST['date']
         date = datetime.date(datetime.strptime(date, "%b. %d, %Y"))
-        print(date)
+        print(request.POST)
         print(request.session.keys())
         seat_type_num = request.POST['seat_type_num']
         for i in range(1, int(seat_type_num)+1):
@@ -73,12 +79,11 @@ class ticketOrder(TemplateView, LoginRequiredMixin):
                 for j in range(1, int(seat_type_counter)+1):
                     seat_index = seat_type +"_" + str(j)
                     seat_key = request.POST[seat_index]
-                    seat_key_set = seat_type_to_seat_key.setdefault(seat_type, [])
+                    seat_key_set = seat_type_to_seat_key.setdefault(seat_type_dict[seat_type], [])
                     seat_key_set.append(seat_key)
             except:
                 pass
-
-      
+        print(seat_type_to_seat_key)
         user = get_currentUser(request)
         passenger_set = user.passenger_set.all()
         for p in passenger_set:
@@ -90,7 +95,8 @@ class ticketOrder(TemplateView, LoginRequiredMixin):
                                                              train_id = train_id,
                                                              date=date,
                                                              start=start,
-                                                             end = end,passenger_set=passenger_set))
+                                                             end = end,
+                                                             passenger_set=passenger_set))
 
 # This is a class for search process
 class Query(object):
@@ -123,7 +129,7 @@ class Query(object):
                     arrive_time = \
                         train.run_set.get(train_come_by=train,station_name=self.start).arrive_time
                     resultSet[train.train_id] = {'yideng':[],'erdeng':[],'shangwu':[],'ruanwo':[],
-                                                 'yingzuo':[],'yingzuo':[],'wuzuo':[], "arrive_time":arrive_time}
+                                                 'yingzuo':[],'yingzuo':[], "arrive_time":arrive_time}
                     trainStartTime[train.train_id]= \
                         train.run_set.get(train_come_by=train,station_name=self.start).arrive_time
                     for carriage in train.carriage_set.all():

@@ -36,7 +36,8 @@ class train_create(PermissionRequiredMixin, CreateView):
         return self.render_to_response(self.get_context_data(form=form, item_form=run_form, trainFileForm=trainFileForm))
 
     def post(self, request, *args, **kwargs):
-        print(type(self.request.POST))
+        print request.POST
+        print RunForm_stationSet
         self.object=None
         form_class = self.get_form_class()
         form =self.get_form(form_class)
@@ -68,11 +69,7 @@ class train_create(PermissionRequiredMixin, CreateView):
                         day_count += 1
                 run.count_over_night = day_count
                 run.run_key = Run.generateRunKey(run.station_name.station_id, train.train_id)
-                print("here is no problem")
                 run.train_come_by = train
-                print(run.count_over_night)
-                print(run.run_key)
-                print(run.order_station)
                 run.save()
             return HttpResponseRedirect(self.get_success_url())
         else:

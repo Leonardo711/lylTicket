@@ -1,12 +1,10 @@
 {% extends "base.html" %}
-
 {% block content %}
 <html lang="zh-CN">
 <head>
     <title>车票预订</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
     .table th{
         text-align: center;
@@ -64,26 +62,7 @@
         text-align: right;
     } 
     </style>
-<script type="text/javascript" >
-    function addPassenger(checkbox_name,name)
-    {   var oBox= document.getElementById(checkbox_name);
-        //oBox.checked = true;
-        var addButton = document.getElementById("add");
-       
-        if(oBox.checked)
-        {
-            
-            alert(name);
-            addButton.click();
-        }
-        else
-        {
-
-           
-        }
-    }
-</script> 
-</head>     
+</head>
     <script src="/static/js/jquery-2.0.3.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
 
@@ -99,11 +78,7 @@
             </div>
             <div class="" id="train_info_ticket">
                 {% for type, seatSet in seat_type_to_seat_key.iteritems %}              
-                    {% ifequal seatSet|length 0 %}
-                        <span>{{ type }}: 无票 &nbsp<span>
-                    {% else %}
-                        <span>{{ type }}: {{ seatSet|length }} 张票 &nbsp<span>
-                    {% endifequal %}
+                    <span>{{ type }}: {{ seatSet|length }} 张票 &nbsp<span>
                 {% endfor %}
             </div>
         </form>
@@ -118,8 +93,7 @@
         <form method="post">{% csrf_token %}
             <div class="" id="train_info_ticket">
                 {% for p in passenger_set %}              
-                    <span><input id="{{p.passenger_name}}" type="checkbox" value="" onclick="addPassenger('{{p.passenger_name}}','{{p.passenger_name}}')" />&nbsp{{p.passenger_name}} &nbsp&nbsp</span>
-                        
+                    <span><input id="{{p.passenger_id}}" p_name="{{p.passenger_name}}"  type="checkbox" value="" name="add" />&nbsp{{p.passenger_name}} &nbsp&nbsp</span>
                 {% endfor %}
 
             </div>
@@ -158,24 +132,28 @@
                             <input name="end" value="{{end}}"  type="hidden"/> 
                             <input name="time" value="{{date.year}}年{{date.month}}月{{date.day}}日" type="hidden"/>
                             </div>
-
-                            <td> <input name="xuhao" type="text" class="form-control" placeholder="" readonly="1" value="1" ></td>
-                            <td> <select name="seat_type" id = "seattype">
-                                <option value="business">商务座</option>
-                                <option value="first">一等座</option>
-                                <option value="second" selected="1"  >二等座</option>
-                                </select> 
+                            <input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="'1" />
+                            <td> <input  type="text" class="form-control" id="id_form-0-order" name="form-0-order"  readonly="readonly" value="1" ></td>
+                            <td> <select id="id_form-0-seat_type" name="form-0-seat_type">
+                                {% for type in seat_type_to_seat_key %}
+                                <option value="{{ type }}">{{ type }}</option>
+                                {% endfor %}
+                                </select>
                             </td>
-                            <td> <input name="student" type="text" class="form-control" placeholder=""> </td>
-                            <td> <input name="passenger_name" type="text" class="form-control" placeholder=""> </td>
-                            <td> <input name="passenger_id" type="text" class="form-control" placeholder=""> </td>
-                            <td> <input name="tel" type="text" class="form-control" placeholder=""> </td>
+                            <td>
+                                <select id="id_form-0-student" name="form-0-student">
+                                <option value="0" selected="1">成人票</option>
+                                <option value="1">学生票</option>
+                                </select>
+                            </td>
+                            <td> <input id="id_form-0-name" name="form-0-name" type="text" class="form-control" placeholder="" passname="passname"> </td>
+                            <td> <input id="id_form-0-id" name="form-0-id"  type="text" class="form-control" placeholder="" passid="passid"> </td>
+                            <td> <input id="id_form-0-phone" name="form-0-phone" type="text" class="form-control" placeholder="" passphone="passphone"> </td>
                             <td><button type="button" name="delete" class="btn btn-danger " style="font-size:16px">&nbsp删除&nbsp<span class="glyphicon glyphicon-remove"></span></button></td>
                         </tr>
                         </form>
                     </tbody>        
                 </table>
-                <button type="button" id="add"  class="btn btn-info glyphicon glyphicon-plus" style="font-size:16px">添加乘客</button>
             </div>
             {% for type, seatSet in seat_type_to_seat_key.iteritems %}
                 <div>
@@ -194,6 +172,6 @@
         </form>
     </div>
 
-<script type="text/javascript" src='/static/modify4.js'>
+<script type="text/javascript" src='/static/addTicket.js'>
 </script>
 {% endblock %}
