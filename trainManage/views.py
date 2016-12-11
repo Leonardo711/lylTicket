@@ -5,14 +5,15 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-from .models import Train, Run, Station, Carriage,Seat
+from .models import Train, Run, Station, Carriage,Seat,TimeSpan
 from .forms import *
 from django.forms import formset_factory
 from datetime import datetime
 from datetime import datetime, timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
 
-timeSpan = 3 # 卖票的时间跨度
+span = 3 # 卖票的时间跨度
 # Create your views here.
 class train_ListView(PermissionRequiredMixin, ListView):
     permission_required = "trainManage.add_train"
@@ -113,16 +114,23 @@ class addCarriage(PermissionRequiredMixin, CreateView):
             train_id = self.object
             carriage_list = []
             seat_list = []
+            timeSpan = TimeSpan.objects.all()
             for carriageform in carriage_form:
                 carriage = carriageform.save(commit=False)
                 carriage.train_id = self.object
                 carriage.carriage_key = Carriage.generateCarriageKey(self.object.train_id, carriage.carriage_id)
                 #carriage.save()
                 carriage_list.append(carriage)
+                if len(timeSpan) == 0:
+                    timeSpan = []
+                    for i in range(span):
+                        date = TimeSpan(time = datetime.date(datetime.today()+ timedelta(i)))
+                        timeSpan.append(date)
+                    TimeSpan.objects.bulk_create(timeSpan)
+                    timeSpan = TimeSpan.objects.all()
                 for seat_id in range(1, carriage.num_seat+1):
-                    for i in range(timeSpan):
-                        print(i)
-                        date = datetime.date(datetime.today()+timedelta(i))
+                    for date in timeSpan:
+                        #date = time.time
                         seat_key = Seat.generateSeatRunKey(date, carriage.carriage_key, seat_id)
                         print(seat_key)
                         seat = Seat(seat_key = seat_key,
@@ -141,6 +149,49 @@ class addCarriage(PermissionRequiredMixin, CreateView):
             return self.render_to_response(
                 self.get_context_data(form=self.object,
                                       item_form=carriage_form))
+
+
+@permission_required('trainManage.delete_timespan')
+def updateSeat(request):
+    timeSpan = 10
+    date_list = []
+    newSeat_list = []
+    exist_list = TimeSpan.objects.all()
+    for date in exist_list:
+        if  (datetime.date(datetime.today()) - date.time).days > 30:
+            TimeSpan.delete(date)
+    if exist_list[0].time == datetime.date(datetime.today()):
+        return HttpResponse('no need to update')
+    Seat_list = exist_list[0].seat_set.all()
+    for i in range(timeSpan):
+        date_list.append(TimeSpan(time=datetime.date(datetime.now() +timedelta(i))))
+    for date in date_list:
+        if date not in exist_list:
+            print 'exitst_list'
+            for seat in Seat_list:
+                print "seat_list"
+                seat_key = seat.seat_key
+                tmp_key = list(seat_key)
+                tmp_key[7:15] = date.time.strftime("%Y%m%d")
+                seat_key = ''.join(tmp_key)
+                status = seat.status
+                status = '1' * len(status)
+                newSeat = Seat(seat_key = seat_key,
+                            carriage=seat.carriage,
+                            seat_id = seat.seat_id,
+                            date=date,
+                            status=status)
+                newSeat_list.append(newSeat)
+        else:
+            date_list.remove(date)
+    try:
+        TimeSpan.objects.bulk_create(date_list)
+        Seat.objects.bulk_create(newSeat_list)
+    except:
+        return HttpResponse("wrong with something, please check the database")
+    return HttpResponse("Done with update")
+
+
 
 def trainCreateFromFile(request):
     if request.method == "POST":

@@ -79,30 +79,33 @@ class Carriage(models.Model):
         return self.carriage_key
 
 
+class TimeSpan(models.Model):
+    time = models.DateField(primary_key=True)
 
 class Seat(models.Model):
     @staticmethod
     def generateSeatRunKey(date, carriage_key, seat_id):
         seat_key = carriage_key \
-                + date.strftime("%Y%m%d") \
+                + date.time.strftime("%Y%m%d") \
                 + '{:0>3}'.format(seat_id)
         return seat_key
 
     seat_key = models.CharField(max_length=30, primary_key=True)
     carriage = models.ForeignKey(Carriage, on_delete=models.CASCADE)
     seat_id = models.IntegerField()
-    date = models.DateField()
+    date = models.ForeignKey(TimeSpan)
     status = models.CharField(max_length=100)
 
     def __str__(self):
-        return str(self.carriage.carriage_id) + str(self.date) \
+        return str(self.carriage.carriage_id) + str(self.date.time) \
                + str(self.seat_id)
 
     def __unicode__(self):
-        return str(self.carriage.carriage_id) + str(self.date) \
+        return str(self.carriage.carriage_id) + str(self.date.time) \
                + str(self.seat_id)
     class Meta:
         ordering = ["seat_key", "date"]
+
 
 class Price(models.Model):
     train_type = models.CharField('列车类型',max_length=20)
@@ -111,10 +114,10 @@ class Price(models.Model):
     price_per_km = models.FloatField('每公里计价',default=0.5)
 
     def __str__(self):
-        return train_type+" "+seat_type+" "+str(ratio_student)+" "+str(price_per_km)
+        return self.train_type+" "+self.seat_type+" "+str(self.ratio_student)+" "+str(self.price_per_km)
 
     def __unicode__(self):
-        return train_type+" "+seat_type+" "+str(ratio_student)+" "+str(price_per_km)
+        return self.train_type+" "+self.seat_type+" "+str(self.ratio_student)+" "+str(self.price_per_km)
 
 def loadPrice():
     p = Price.objects.create(train_type='G',seat_type=u'一等座',ratio_student=0.5,price_per_km=0.775)
