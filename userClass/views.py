@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User,Group
 from .forms import *
-from ticketQuery.models import Order
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -15,6 +14,14 @@ import base64
 from django.conf import settings as django_settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.sessions.models import Session
+
+from addPassenger.models import Passenger
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from trainManage.models import *
+from ticketQuery.models import *
+from datetime import datetime
+import pytz
 
 #from ticketQuery.models import Order
 
@@ -261,3 +268,127 @@ class PersonInfo(LoginRequiredMixin,TemplateView):
         
         
         return self.render_to_response(self.get_context_data(object_list = form_list,order_list=order_set))
+
+
+class PassengerDelete(LoginRequiredMixin, DeleteView):
+    model = Passenger
+    template_name = "passenger_confirm_delete.html"
+    success_url = '/accounts/personinfo/'
+
+    # def get(self, request, *args, **kwargs):
+    #     print "________________here_________________"
+    #     print args
+    #     print kwargs
+    #     return HttpResponse('buyaogaoshi')
+
+# def PassengerDelete(request, *args, **kwargs):
+#     print request.GET
+#     print request.POST
+
+class PersonInfoOrder(LoginRequiredMixin,TemplateView):
+    template_name = "personinfo_order_detail.html"
+    def get(self, request, *args, **kwargs):
+        order_id = kwargs['pk']
+        print "order_id: ",
+        print order_id
+        od = Order.objects.get(order_id=order_id)
+        #first to get the start station and end station order (int) from Run table
+        start_station_ID = Station.objects.get(station_name=od.start_station).station_id
+        end_station_ID = Station.objects.get(station_name=od.end_station).station_id
+        print "-------------  Run order_of_station -----------------"
+        Run_start_station = Run.objects.get(train_come_by_id = od.train_name,station_name_id = start_station_ID)
+        order_of_start_station = Run_start_station.order_of_station
+        print Run_start_station.order_of_station
+        Run_end_station = Run.objects.get(train_come_by_id=od.train_name,station_name_id = end_station_ID)
+        order_of_end_station = Run_end_station.order_of_station
+        print Run_end_station.order_of_station
+        print "-------------  Run  order_of_station-----------------"
+        
+        start_time = Run_start_station.arrive_time
+        end_time = Run_end_station.arrive_time
+        distance = Run_end_station.distance_count - Run_start_station.distance_count
+    
+
+        print "-----------start_end_time and distance-------"
+        print start_time,end_time,distance
+        print "-----------start_end_time and distance-------"
+        otherinfo = {}
+        otherinfo['start_date'] = od.trip_date.strftime("%Y/%m/%d")
+        otherinfo['start_time'] = start_time
+        otherinfo['end_time'] = end_time
+        otherinfo['distance'] = distance
+        seat_type_dict = {'shangwu': '商务座',
+        'yideng': '一等座',
+        'erdeng': '二等座',
+        'ruanwo': '软卧',
+        'yingwo': '硬卧',
+        'yingzuo': '硬座',
+        }
+
+        otherinfo['seat_type'] = seat_type_dict[od.seat.carriage.seat_type]
+        otherinfo['order_of_start_station'] = order_of_start_station
+        otherinfo['order_of_end_station'] = order_of_end_station
+
+        #cttime = datetime.strptime(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),"%Y-%m-%d %H:%M:%S")
+        cttime = datetime.now()
+        #cttime.replace(tzinfo=pytz.timezone('Asia/Shanghai'))
+        tz = pytz.timezone('Asia/Shanghai')
+        cttime = tz.localize(cttime)
+        print cttime
+        trip_date = od.trip_date
+        
+        print trip_date
+        
+        dt = trip_date - cttime 
+        print dt.days,dt.total_seconds()
+        timeinfo = {}
+        timeinfo['days'] = dt.days
+        timeinfo['total_seconds'] = dt.total_seconds()
+        timeinfo['total_hours'] = dt.total_seconds()/3600
+        timeinfo['hours'] = int(timeinfo['total_hours']) - timeinfo['days']*24
+        timeinfo['minutes'] = int((timeinfo['total_seconds'] - int(timeinfo['total_hours'])*3600)/60)
+        timeinfo['seconds'] = timeinfo['total_seconds'] - int(timeinfo['total_hours'])*3600 - timeinfo['minutes']*60 
+
+        if dt.days<0:
+            od.order_status = 1
+        od.save()
+
+        return self.render_to_response(self.get_context_data(order = od,otherinfo=otherinfo,timeinfo=timeinfo))
+
+class OrderDelete(LoginRequiredMixin,TemplateView):
+    template_name = "order_confirm_delete.html"
+    success_url = '/accounts/personinfo/'
+    def get(self, request, *args, **kwargs):
+        order_id = kwargs['pk']
+        print "order_id: ",
+        print order_id
+        od = Order.objects.get(order_id=order_id)
+        return self.render_to_response(self.get_context_data(object = od))
+
+    def post(self, request, *args, **kwargs):
+        order_id = request.POST['order_id']
+        print "Post order_id: ",
+        print order_id
+        od = Order.objects.get(order_id=order_id)
+        
+        #first to get the start station and end station order (int) from Run table
+        start_station_ID = Station.objects.get(station_name=od.start_station).station_id
+        end_station_ID = Station.objects.get(station_name=od.end_station).station_id
+        print "-------------  Run order_of_station -----------------"
+        Run_start_station = Run.objects.get(train_come_by_id = od.train_name,station_name_id = start_station_ID)
+        order_of_start_station = Run_start_station.order_of_station
+        print Run_start_station.order_of_station
+        Run_end_station = Run.objects.get(train_come_by_id=od.train_name,station_name_id = end_station_ID)
+        order_of_end_station = Run_end_station.order_of_station
+        print Run_end_station.order_of_station
+        print "-------------  Run  order_of_station-----------------"
+
+        #recover the seat status
+        seat = od.seat
+        status_list = list(seat.status)
+        status_list[order_of_start_station-1:order_of_end_station]=u'1'*(order_of_end_station-order_of_start_station+1)
+        seat.status = ''.join(status_list)
+        seat.save()
+        od.delete()
+
+        return HttpResponse("退票成功!")
