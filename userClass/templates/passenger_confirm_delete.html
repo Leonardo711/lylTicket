@@ -1,0 +1,35 @@
+<html lang="zh-CN">
+<head>    
+    <title>删除乘客</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    #base{
+        position:fixed;
+        width:30%;
+        height:30%;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        margin:auto;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    </style>
+                        
+</head>     
+    <script src="/static/js/jquery-2.0.3.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+
+<body>
+    <div class="container" id="base">
+    <form action="" method="post">{% csrf_token %}
+        <p>确定要删除该乘客 {{ object.passenger_name }} 所有信息么?</p>
+         <div class="" id="rightbutton"><button type="submit" class="btn btn-danger btn-lg" style="font-size:16px" >确定<span class="glyphicon glyphicon-ok" ></span></button></div>   
+    </form>
+    </div>
+</body>

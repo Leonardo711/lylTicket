@@ -68,6 +68,7 @@
                 <th> 姓名 </th>
                 <th> 乘客类型</th>
                 <th> 身份证号 </th>
+                <th> 备注 </th>
             </tr>
         </thead>
         {% for obj in object_list %}
@@ -76,6 +77,8 @@
                             <td>{{ obj.passenger_name }}</td>
                             <td>{%if obj.student %}学生{%else%}成人{%endif%}</td>
                             <td>{{ obj.passenger_id }}</td>
+                            <td><a href="/accounts/deletePassenger/{{obj.passenger_id}}" type="button">删除</a></td>
+
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -96,6 +99,8 @@
                 <th> 车次 </th>
                 <th> 出发车站 </th>
                 <th> 到达车站 </th>
+                <th> 订单状态 </th>
+                <th> 进入详情页 </th>
             </tr>
         </thead>
         {% for obj in order_list %}
@@ -107,6 +112,9 @@
                             <td>{{ obj.train_name }}</td>
                             <td>{{ obj.start_station }}</td>
                             <td>{{ obj.end_station }}</td>
+                            <td>{%ifequal obj.order_status 0 %}未发车{%endifequal%}{%ifequal obj.order_status 1 %}已完成{%endifequal%}{%ifequal obj.order_status 2 %}订单取消{%endifequal%}</td>
+                            <td><a href="/accounts/personinfo/{{obj.order_id}}" type="button">进入</a></td>
+
                         </tr>
                         {% endfor %}
                     </tbody>
