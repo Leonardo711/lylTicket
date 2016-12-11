@@ -5,5 +5,5 @@ urlpatterns = [
     url(r'^$', ticketQuery.as_view(), name = "ticket_query"),
     url(r'^order/$', ticketOrder.as_view(), name="ticket_order"),
     url(r'^order/orderconfirm/$', ticketOrderConfirm.as_view(), name="ticket_order_confirm"),
-    url(r'^order/ordercompleted/$', ticketOrderCompleted.as_view(), name='ticket_order_completed'),
+    url(r'^order/ordercompleted/$', ticketOrderCompleted.as_view(), name="ticket_order_completed"),
 ]

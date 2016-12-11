@@ -354,7 +354,7 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
             #The phone field in model is Integer
             passenger_phone = passenger_info['passenger_phone']
 
-            order_time = datetime.time(datetime.now())
+            order_time = datetime.now()
 
             usr = get_currentUser(request)
             user_name = usr.username
@@ -372,6 +372,15 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
             print Run_end_station.order_of_station
             print "-------------  Run  order_of_station-----------------"
             arrive_time = Run_start_station.arrive_time
+
+            
+            #dt.date(passenger_info['date'])
+            print str(passenger_info['date'])+" "+arrive_time.strftime("%H:%M:%S")
+            dt = datetime.strptime(str(passenger_info['date'].replace('/','-'))+" "+arrive_time.strftime("%H:%M:%S"), "%Y-%m-%d %H:%M:%S")
+            print dt
+            
+            trip_date = dt
+
             print
             #get the status of the seat
             print "seat status: " + str(seat.date)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
@@ -381,10 +390,26 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
             seat.status = ''.join(status_list)
             print "update seat status: " + str(seat.date)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
             seat.save()
-            od = Order.objects.create(order_id=order_id,user_name=user_name,passenger_name=passenger_name,\
+
+            try:
+                od = Order.objects.create(order_id=order_id,user_name=user_name,passenger_name=passenger_name,\
                 passenger_id=passenger_id,passenger_phone=passenger_phone,student=student,\
                 order_time=order_time,train_name=train_name,start_station=start_station,end_station=end_station,\
-                trip_date=arrive_time,seat=seat,pay=pay)
-            od.save()
+                trip_date=trip_date,seat=seat,pay=pay)
+                od.save()
+            except Exception, e:
+                print e
+                status_list = list(seat.status)
+                status_list[order_of_start_station-1:order_of_end_station]=u'1'*(order_of_end_station-order_of_start_station+1)
+                seat.status = ''.join(status_list)
+                seat.save()
+                return HttpResponse("单人每车次限购一张票!")
+            else:
+                pass
+            finally:
+                pass
+
+            
+
 
         return HttpResponse("购票成功!")
