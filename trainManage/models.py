@@ -34,7 +34,7 @@ class Run(models.Model):
         run_key = '{:X<5}'.format(train_id) + '{:0>5}'.format(station_id)
         return run_key
 
-    run_key = models.CharField(max_length=30, primary_key=True) 
+    run_key = models.CharField(max_length=30, primary_key=True)
     station_name = models.ForeignKey(Station, on_delete=models.CASCADE)
     train_come_by = models.ForeignKey(Train, on_delete=models.CASCADE)
     order_of_station = models.IntegerField(default = 1)
@@ -87,13 +87,13 @@ class Seat(models.Model):
                 + date.strftime("%Y%m%d") \
                 + '{:0>3}'.format(seat_id)
         return seat_key
-    
+
     seat_key = models.CharField(max_length=30, primary_key=True)
     carriage = models.ForeignKey(Carriage, on_delete=models.CASCADE)
     seat_id = models.IntegerField()
     date = models.DateField()
     status = models.CharField(max_length=100)
-    
+
     def __str__(self):
         return str(self.carriage.carriage_id) + str(self.date) \
                + str(self.seat_id)
@@ -103,3 +103,55 @@ class Seat(models.Model):
                + str(self.seat_id)
     class Meta:
         ordering = ["seat_key", "date"]
+
+class Price(models.Model):
+    train_type = models.CharField('列车类型',max_length=20)
+    seat_type = models.CharField('座位类型',max_length=20)
+    ratio_student = models.FloatField('学生票打折系数',default=1)
+    price_per_km = models.FloatField('每公里计价',default=0.5)
+
+    def __str__(self):
+        return train_type+" "+seat_type+" "+str(ratio_student)+" "+str(price_per_km)
+
+    def __unicode__(self):
+        return train_type+" "+seat_type+" "+str(ratio_student)+" "+str(price_per_km)
+
+def loadPrice():
+    p = Price.objects.create(train_type='G',seat_type=u'一等座',ratio_student=0.5,price_per_km=0.775)
+    p.save()
+    p = Price.objects.create(train_type='G',seat_type=u'二等座',ratio_student=0.5,price_per_km=0.446)
+    p.save()
+    p = Price.objects.create(train_type='G',seat_type=u'商务座',ratio_student=0.5,price_per_km=0.9)
+    p.save()
+    p = Price.objects.create(train_type='G',seat_type=u'硬座',ratio_student=0.5,price_per_km=0.3)
+    p.save()
+    p = Price.objects.create(train_type='G',seat_type=u'硬卧',ratio_student=0.5,price_per_km=0.7)
+    p.save()
+    p = Price.objects.create(train_type='G',seat_type=u'软卧',ratio_student=0.5,price_per_km=1.4)
+    p.save()
+
+    p = Price.objects.create(train_type='D',seat_type=u'一等座',ratio_student=0.5,price_per_km=0.348)
+    p.save()
+    p = Price.objects.create(train_type='D',seat_type=u'二等座',ratio_student=0.5,price_per_km=0.288)
+    p.save()
+    p = Price.objects.create(train_type='D',seat_type=u'商务座',ratio_student=0.5,price_per_km=0.5)
+    p.save()
+    p = Price.objects.create(train_type='G',seat_type=u'硬座',ratio_student=0.5,price_per_km=0.18)
+    p.save()
+    p = Price.objects.create(train_type='D',seat_type=u'硬卧',ratio_student=0.5,price_per_km=0.4)
+    p.save()
+    p = Price.objects.create(train_type='D',seat_type=u'软卧',ratio_student=0.5,price_per_km=1.2)
+    p.save()
+
+    p = Price.objects.create(train_type='K',seat_type=u'一等座',ratio_student=0.5,price_per_km=0.348)
+    p.save()
+    p = Price.objects.create(train_type='K',seat_type=u'二等座',ratio_student=0.5,price_per_km=0.288)
+    p.save()
+    p = Price.objects.create(train_type='K',seat_type=u'商务座',ratio_student=0.5,price_per_km=0.5)
+    p.save()
+    p = Price.objects.create(train_type='K',seat_type=u'硬座',ratio_student=0.5,price_per_km=0.16)
+    p.save()
+    p = Price.objects.create(train_type='K',seat_type=u'硬卧',ratio_student=0.5,price_per_km=0.853)
+    p.save()
+    p = Price.objects.create(train_type='K',seat_type=u'软卧',ratio_student=0.5,price_per_km=1.217)
+    p.save()

@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import  inlineformset_factory
+from django.forms import  inlineformset_factory,modelformset_factory,formset_factory
 from trainManage.models import Station
 
 class TicketQueryForm(forms.Form):
@@ -22,3 +22,15 @@ class QueryResultForm(forms.Form):
     date = forms.DateField(required=True, widget=forms.DateInput())
 
 
+#class PassengerInfoForm(forms.Form):
+
+
+class PassengerInfoForm(forms.Form):
+    order = forms.IntegerField(widget=forms.TextInput(attrs={'readonly':'readonly', 'value':1}))
+    seat_type = forms.CharField()
+    student = forms.IntegerField()
+    passenger_name = forms.CharField()
+    passenger_id = forms.CharField()
+    passenger_phone = forms.CharField()
+    
+PassengerInfoFormSet = formset_factory(PassengerInfoForm,max_num=10,extra=1)

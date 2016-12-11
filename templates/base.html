@@ -45,7 +45,7 @@
         {% if user.is_authenticated %}
          <ul class="nav nav-pills navbar-right" id="right">         
             <li id="welcome">欢迎,</li>  
-            <li><a href="#">{{user.username}}</a></li>
+            <li><a href="/accounts/personinfo">{{user.username}}</a></li>
             <li id="welcome">|</li>  
             <li><a href="/accounts/logout">退出登录</a></li>   <!--sign out-->
         </ul>

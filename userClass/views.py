@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User,Group
 from .forms import *
+from ticketQuery.models import Order
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect, HttpResponse
 
@@ -253,10 +254,10 @@ class PersonInfo(LoginRequiredMixin,TemplateView):
         form_list = []
         user = get_currentUser(request)
         #order_set = Order.objects.filter(user_name=user.email)
-        order_set = []
+        order_set = Order.objects.filter(user_name=user.username)
         for p in user.passenger_set.all():
             form_list.append(p)
             print p.passenger_name
-
+        
         
         return self.render_to_response(self.get_context_data(object_list = form_list,order_list=order_set))

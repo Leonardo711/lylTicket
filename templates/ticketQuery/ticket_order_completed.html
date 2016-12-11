@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html lang="zh-CN">
+<head>
+    <title>{% block title %}购票成功{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    .table th{
+        text-align: center;
+        background-color: #39f;
+        font-weight:bold;
+        color: #fff;
+    }
+    #table_title{     
+        width: 55%; 
+        font-size:18px;
+        background-color:#eee;
+        margin-top: 25px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+   
+    } 
+    #table_content td{
+        text-align: center;
+        vertical-align:middle;
+    }
+    
+
+    #search_inside{     
+        text-align:center;
+        margin:0 auto;
+        height: 100px;
+        margin-top: 25px;
+    } 
+
+    #search_result{     
+        text-align:center;
+        padding-bottom: 0px;
+        width: 55%; 
+        padding-left: 0px;
+        padding-right: 0px;
+    } 
+    #buy{     
+        text-align: right;
+    } 
+    </style>    
+
+</head>     
+<script src="/static/js/jquery-2.0.3.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+{% csrf_token %}
+购票成功！！
+
+{% endblock %}

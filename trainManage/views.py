@@ -111,11 +111,14 @@ class addCarriage(PermissionRequiredMixin, CreateView):
         if ( carriage_form.is_valid() ):
             status = '1'*self.object.num_station
             train_id = self.object
+            carriage_list = []
+            seat_list = []
             for carriageform in carriage_form:
                 carriage = carriageform.save(commit=False)
                 carriage.train_id = self.object
                 carriage.carriage_key = Carriage.generateCarriageKey(self.object.train_id, carriage.carriage_id)
-                carriage.save()
+                #carriage.save()
+                carriage_list.append(carriage)
                 for seat_id in range(1, carriage.num_seat+1):
                     for i in range(timeSpan):
                         print(i)
@@ -128,7 +131,10 @@ class addCarriage(PermissionRequiredMixin, CreateView):
                                     date=date,
                                     status=status)
                         print("nothing wrong here")
-                        seat.save()
+                        #seat.save()
+                        seat_list.append(seat)
+            Carriage.objects.bulk_create(carriage_list)
+            Seat.objects.bulk_create(seat_list)
             return HttpResponseRedirect(self.get_success_url())
         else:
             print("wrong validation")
@@ -144,6 +150,8 @@ def trainCreateFromFile(request):
         station_list = []
         arrive_time_list = []
         ex_train = ''
+        train_list =[]
+        run_list = []
         for line in  request.FILES['file']:
             try:
                 train_id, order, station_name, arrive_time, distance = line.strip().split("\t")
@@ -168,7 +176,8 @@ def trainCreateFromFile(request):
                 train.train_id = ex_train
                 train.train_type = train_id[0]
                 train.num_station = ex_order
-                train.save()
+                #train.save()
+                train_list.append(train)
                 for i in range(ex_order):
                     run = Run()
                     runCount = i+1;
@@ -183,19 +192,22 @@ def trainCreateFromFile(request):
                     run.arrive_time = arrive_time_list[i]
                     run.distance_count = distance_list[i]
                     run.train_come_by = train
-                    run.save()
+                    #run.save()
+                    run_list.append(run)
                 ex_order = 1
                 distance_list=[distance]
                 station_list=[Station.objects.get(station_name = station_name)]
                 arrive_time_list = [arrive_time]
                 day_count = 0
-                run.save()
+                #run.save()
+                run_list.append(run)
         train = Train()
         train.distance = distance_list[-1]
         train.train_id = ex_train
         train.train_type = train_id[0]
         train.num_station = ex_order
-        train.save()
+        #train.save()
+        train_list.append(train)
         day_count  = 0
         for i in range(ex_order):
             run = Run()
@@ -211,13 +223,19 @@ def trainCreateFromFile(request):
             run.arrive_time = arrive_time_list[i]
             run.distance_count = distance_list[i]
             run.train_come_by = train
-            run.save()
+            #run.save()
+            run_list.append(run)
+        Train.objects.bulk_create(train_list)
+        Run.object.bulk_create(run_list)
     else:
         print('wrong')
     return HttpResponseRedirect("/trainManage/create/")
 
 def load(station_file):
+    station_list = []
     for line in (open(station_file, 'r')):
         station_id, station_name, station_city = line.strip().split("\t")
         station = Station.objects.create(station_id=int(station_id), station_name=station_name,station_city=station_city)
-        station.save()
+        #station.save()
+        station_list.append(station)
+    Station.objects.bulk_create(station_list)

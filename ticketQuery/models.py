@@ -12,13 +12,15 @@ class Order(models.Model):
     user_name = models.CharField('用户名',max_length=20)
     passenger_name = models.CharField('乘客姓名',max_length=20)
     passenger_id = models.CharField('乘客身份证号',max_length=20)
+    passenger_phone = models.CharField('电话',max_length=10)
     student = models.IntegerField('学生票',default=0)
     order_time = models.TimeField('订票时间')
     train_name = models.ForeignKey(Train, on_delete=models.CASCADE)
     start_station = models.ForeignKey(Station,on_delete=models.CASCADE,related_name='start_station')
     end_station = models.ForeignKey(Station,on_delete=models.CASCADE,related_name='end_station')
-    trip_date = models.TimeField('出发时间')
+    trip_date = models.TimeField('出发日期')
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
+    pay = models.FloatField('金额',default = 0)
 
 
     def __str__(self):
