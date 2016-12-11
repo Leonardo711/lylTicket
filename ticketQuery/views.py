@@ -385,12 +385,12 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
 
             print
             #get the status of the seat
-            print "seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
+            #print "seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
             #update the status of start_staion to end_staion-1,the end_station should not be changed
             status_list = list(seat.status)
             status_list[order_of_start_station-1:order_of_end_station]=u'0'*(order_of_end_station-order_of_start_station+1)
             seat.status = ''.join(status_list)
-            print "update seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
+            #print "update seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
             seat.save()
 
             try:
