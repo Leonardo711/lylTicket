@@ -44,9 +44,11 @@ class ticketQuery(TemplateView):
         endStation = Station.objects.get(station_id=endStationID)
         date =  datetime.strptime(request.POST['date'], "%m/%d/%Y")
         date = datetime.date(date)
-        query = Query(startStation, endStation, date)
+        query = Query(startStation, endStation, TimeSpan(time=date))
+        print('below here')
         resultSet= query.search()
-        print resultSet
+        print('below here')
+        #print resultSet
         return self.render_to_response(self.get_context_data(form=form,
                                                              startStation=startStation,
                                                              endStation=endStation,
@@ -126,8 +128,8 @@ class Query(object):
             startOrder = startRun.order_of_station
             endOrder = endRun.order_of_station
             today = datetime.date(datetime.today())
-            startDate = self.date - timedelta(startRun.count_over_night) # the start date of train
-            if today< self.date or ( today==self.date and datetime.time(datetime.now()) < startRun.arrive_time): # before train arrive
+            startDate = self.date.time - timedelta(startRun.count_over_night) # the start date of train
+            if today< self.date.time or ( today==self.date.time and datetime.time(datetime.now()) < startRun.arrive_time): # before train arrive
             # input time must later than now
                 if  startOrder < endOrder:
                     arrive_time = \
@@ -138,7 +140,7 @@ class Query(object):
                         train.run_set.get(train_come_by=train,station_name=self.start).arrive_time
                     for carriage in train.carriage_set.all():
                         seatSet = carriage.seat_set.all()
-                        seatSet = seatSet.filter(date=startDate)
+                        seatSet = seatSet.filter(date=TimeSpan(time=startDate))
                         for seat in seatSet:
                             if seat.status[startOrder-1:endOrder] == "1" *(endOrder-startOrder+1):
                                 type_seat = resultSet.setdefault(train.train_id,{})
@@ -383,12 +385,12 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
 
             print
             #get the status of the seat
-            print "seat status: " + str(seat.date)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
+            print "seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
             #update the status of start_staion to end_staion-1,the end_station should not be changed
             status_list = list(seat.status)
             status_list[order_of_start_station-1:order_of_end_station]=u'0'*(order_of_end_station-order_of_start_station+1)
             seat.status = ''.join(status_list)
-            print "update seat status: " + str(seat.date)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
+            print "update seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
             seat.save()
 
             try:
