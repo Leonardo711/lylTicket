@@ -276,9 +276,9 @@ class PersonInfo(LoginRequiredMixin,TemplateView):
             print cttime
             trip_date = od.trip_date
             dt = trip_date - cttime
-            if dt.days<0:
+            if dt.days<0 and od.order_status!=1:
                 od.order_status = 1
-            od.save() 
+                od.save() 
         
         return self.render_to_response(self.get_context_data(object_list = form_list,order_list=order_set))
 
@@ -362,9 +362,9 @@ class PersonInfoOrder(LoginRequiredMixin,TemplateView):
         timeinfo['minutes'] = int((timeinfo['total_seconds'] - int(timeinfo['total_hours'])*3600)/60)
         timeinfo['seconds'] = timeinfo['total_seconds'] - int(timeinfo['total_hours'])*3600 - timeinfo['minutes']*60 
 
-        if dt.days<0:
+        if dt.days<0 and od.order_status!=1:
             od.order_status = 1
-        od.save()
+            od.save()
 
         return self.render_to_response(self.get_context_data(order = od,otherinfo=otherinfo,timeinfo=timeinfo))
 
