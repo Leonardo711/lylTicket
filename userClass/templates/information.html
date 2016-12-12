@@ -51,6 +51,15 @@
     #buy{     
         text-align: right;
     } 
+    #title_right{     
+        float:right;
+    } 
+    #leftbutton{     
+        float:left;
+    } 
+    #rightbutton{   
+        float:right;
+    } 
     </style>    
 
 </head>     
@@ -59,6 +68,7 @@
 
     <div class="container" id="table_title">
         <span class="glyphicon glyphicon-th-list">乘客列表</span>
+         <span id="title_right">总乘客数:{{object_list | length}}</span>
     </div>
 
     <div class="container" id="search_result">
@@ -83,10 +93,12 @@
                         {% endfor %}
                     </tbody>
         </table>
+        <div class="" id="rightbutton"><button type="button" class="btn btn-info glyphicon" style="font-size:16px" onclick="window.location.href='/addPassenger/'">添加乘客 <span class="glyphicon glyphicon-plus" ></span></button></div> 
     </div>
 
     <div class="container" id="table_title">
-        <span class="glyphicon glyphicon-th-list">订单信息</span>
+        <span class="glyphicon glyphicon-th-list">订单列表</span>
+        <span id="title_right">总订单数:{{order_list | length}}</span>
     </div>
 
     <div class="container" id="search_result">
