@@ -244,7 +244,8 @@ def trainCreateFromFile(request):
                     run.distance_count = distance_list[i]
                     run.train_come_by = train
                     #run.save()
-                    run_list.append(run)
+                    if i!=ex_order-1:
+                        run_list.append(run)
                 ex_order = 1
                 distance_list=[distance]
                 station_list=[Station.objects.get(station_name = station_name)]
@@ -277,7 +278,7 @@ def trainCreateFromFile(request):
             #run.save()
             run_list.append(run)
         Train.objects.bulk_create(train_list)
-        Run.object.bulk_create(run_list)
+        Run.objects.bulk_create(run_list)
     else:
         print('wrong')
     return HttpResponseRedirect("/trainManage/create/")
