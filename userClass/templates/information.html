@@ -48,17 +48,16 @@
         padding-left: 0px;
         padding-right: 0px;
     } 
+    #search_result2{     
+        text-align:center;
+        padding-bottom: 0px;
+        width: 55%; 
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-bottom: 60px;
+    } 
     #buy{     
         text-align: right;
-    } 
-    #title_right{     
-        float:right;
-    } 
-    #leftbutton{     
-        float:left;
-    } 
-    #rightbutton{   
-        float:right;
     } 
     </style>    
 
@@ -67,8 +66,7 @@
     <script src="/static/js/bootstrap.min.js"></script>
 
     <div class="container" id="table_title">
-        <span class="glyphicon glyphicon-th-list">乘客列表</span>
-         <span id="title_right">总乘客数:{{object_list | length}}</span>
+        <span class="glyphicon glyphicon-user">乘客列表</span>
     </div>
 
     <div class="container" id="search_result">
@@ -78,7 +76,7 @@
                 <th> 姓名 </th>
                 <th> 乘客类型</th>
                 <th> 身份证号 </th>
-                <th> 备注 </th>
+                <th> 删除购票人 </th>
             </tr>
         </thead>
         {% for obj in object_list %}
@@ -87,21 +85,19 @@
                             <td>{{ obj.passenger_name }}</td>
                             <td>{%if obj.student %}学生{%else%}成人{%endif%}</td>
                             <td>{{ obj.passenger_id }}</td>
-                            <td><a href="/accounts/deletePassenger/{{obj.passenger_id}}" type="button">删除</a></td>
-
+                            <td><button type="button" name="delete" class="btn btn-danger btn-lg" style="font-size:14px" >&nbsp删除&nbsp<span class="glyphicon glyphicon-remove"></span></button></td>
                         </tr>
                         {% endfor %}
                     </tbody>
         </table>
-        <div class="" id="rightbutton"><button type="button" class="btn btn-info glyphicon" style="font-size:16px" onclick="window.location.href='/addPassenger/'">添加乘客 <span class="glyphicon glyphicon-plus" ></span></button></div> 
+        <div class="" id="buy"><button type="button" class="btn btn-primary btn-lg glyphicon glyphicon-plus" style="font-size:16px" onclick="window.location.href='/addPassenger'">添加购票人</button></div>   
     </div>
 
     <div class="container" id="table_title">
-        <span class="glyphicon glyphicon-th-list">订单列表</span>
-        <span id="title_right">总订单数:{{order_list | length}}</span>
+        <span class="glyphicon glyphicon-th-list">订单信息</span>
     </div>
 
-    <div class="container" id="search_result">
+    <div class="container" id="search_result2">
         <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
@@ -111,8 +107,7 @@
                 <th> 车次 </th>
                 <th> 出发车站 </th>
                 <th> 到达车站 </th>
-                <th> 订单状态 </th>
-                <th> 进入详情页 </th>
+                <th> 删除订单 </th>
             </tr>
         </thead>
         {% for obj in order_list %}
@@ -124,9 +119,7 @@
                             <td>{{ obj.train_name }}</td>
                             <td>{{ obj.start_station }}</td>
                             <td>{{ obj.end_station }}</td>
-                            <td>{%ifequal obj.order_status 0 %}未发车{%endifequal%}{%ifequal obj.order_status 1 %}已完成{%endifequal%}{%ifequal obj.order_status 2 %}订单取消{%endifequal%}</td>
-                            <td><a href="/accounts/personinfo/{{obj.order_id}}" type="button">进入</a></td>
-
+                            <td><button type="button" name="delete" class="btn btn-danger btn-lg" style="font-size:14px" >&nbsp删除&nbsp<span class="glyphicon glyphicon-remove"></span></button></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -134,6 +127,7 @@
       
     </div>
 
+    
 
 <script type="text/javascript" src='/static/modify.js'>
 </script>

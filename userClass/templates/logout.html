@@ -2,5 +2,36 @@
 {% load i18n %}
 
 {% block content %}
-<p>{% trans "Logged out" %}</p>
+
+<html lang="zh-CN">
+<head>    
+    <title>退出登录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+	#base{
+		position:fixed;
+		width:30%;
+		height:30%;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		margin:auto;
+	    font-size: 20px;
+	    font-weight: bold;
+        text-align: center;
+	}
+    </style>
+                        
+</head>     
+    <script src="/static/js/jquery-2.0.3.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+	<div class="container" id="base">
+		<p>您已退出登录!</p>
+	</div>
+</body>
+
 {% endblock %}
