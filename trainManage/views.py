@@ -155,21 +155,24 @@ class addCarriage(PermissionRequiredMixin, CreateView):
 def updateSeat(request):
     timeSpan = 10
     date_list = []
+    dateList = [] # reload date beyond exist_list
     newSeat_list = []
     exist_list = TimeSpan.objects.all()
     for date in exist_list:
         if  (datetime.date(datetime.today()) - date.time).days > 30:
             TimeSpan.delete(date)
-    if exist_list[0].time == datetime.date(datetime.today()):
-        return HttpResponse('no need to update')
-    Seat_list = exist_list[0].seat_set.all()
+    try:
+        Seat_list = exist_list[0].seat_set.all()
+    except:
+        return HttpResponse('there is no seat to update')
     for i in range(timeSpan):
         date_list.append(TimeSpan(time=datetime.date(datetime.now() +timedelta(i))))
+    if exist_list[0].time == datetime.date(datetime.today()) and len(exist_list)==len(date_list):
+        return HttpResponse('no need to update')
     for date in date_list:
         if date not in exist_list:
-            print 'exitst_list'
+            dateList.append(date)
             for seat in Seat_list:
-                print "seat_list"
                 seat_key = seat.seat_key
                 tmp_key = list(seat_key)
                 tmp_key[7:15] = date.time.strftime("%Y%m%d")
@@ -182,10 +185,8 @@ def updateSeat(request):
                             date=date,
                             status=status)
                 newSeat_list.append(newSeat)
-        else:
-            date_list.remove(date)
     try:
-        TimeSpan.objects.bulk_create(date_list)
+        TimeSpan.objects.bulk_create(dateList)
         Seat.objects.bulk_create(newSeat_list)
     except:
         return HttpResponse("wrong with something, please check the database")
