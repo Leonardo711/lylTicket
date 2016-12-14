@@ -123,6 +123,8 @@ class Query(object):
         trainSet = startSet & endSet
         trainStartTime = {}
         for train in trainSet:
+            print train.train_id
+        for train in trainSet:
             startRun = Run.objects.get(train_come_by= train, station_name=self.start)
             endRun = Run.objects.get(train_come_by=train, station_name=self.end)
             startOrder = startRun.order_of_station
@@ -146,6 +148,8 @@ class Query(object):
                                 type_seat = resultSet.setdefault(train.train_id,{})
                                 seat_result = type_seat.setdefault(seat.carriage.seat_type,[])
                                 seat_result.append(seat)
+        
+        resultSet = OrderedDict(sorted(resultSet.iteritems(), key=lambda x:x[1]))
         return resultSet
 
 
