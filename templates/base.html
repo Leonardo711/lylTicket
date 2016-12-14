@@ -7,7 +7,9 @@
 	.nav{
         height: 0px;
     }
-    .body{
+    html,body{
+        margin: 0;
+        padding: 0; 
         height: 100%;
     }
     #pill{
@@ -17,10 +19,11 @@
 	#footer{     
         vertical-align:middle; 
         text-align: center; 
-        margin: 0px auto;
+        margin-top: 10px;
         position: absolute;
-        bottom: 3px;
+        bottom: 0px;
         width: 100%;
+        background-color: #eee;
     }
     #right{     
         margin-right: 0px;
@@ -28,12 +31,20 @@
     #welcome{     
         margin-top: 10px;
     } 
+    #main {
+        position: relative;
+        min-height:100%;   
+    }  
+    #content {
+        padding-bottom: 50px;
+    } 
     </style>
 	</head>
 		<script src="/static/js/jquery-2.0.3.js"></script>
 		<script src="/static/js/bootstrap.min.js"></script>
 	<body>
-		<nav class="navbar navbar-default" role="navigation" class="nav">
+        <div id="main">
+		<nav class="navbar navbar-default " role="navigation" class="nav">
     		<div class="navbar-header"><a class="navbar-brand" href="/">火车票服务</a>
     		</div>
     <div>
@@ -59,15 +70,16 @@
         {% endif %}
     </div>
     </nav> 
+    <div id="content" > 
 		{% block content %}
 		{% endblock %}
-	</body>
-	    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div> 
         <div id="footer" > 
         <footer>
             版权所有 © 2016-2020 中山大学 数据科学与计算机学院</br>
             李友 李弘艺 袁陶希
         </footer>  
         </div>
-    </nav> 
+    </div>
+    </body>
 </html>
