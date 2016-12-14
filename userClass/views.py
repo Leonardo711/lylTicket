@@ -397,7 +397,7 @@ class OrderDelete(LoginRequiredMixin,TemplateView):
             #recover the seat status
             seat = od.seat
             status_list = list(seat.status)
-            status_list[order_of_start_station-1:order_of_end_station]=u'1'*(order_of_end_station-order_of_start_station+1)
+            status_list[order_of_start_station-1:order_of_end_station-1]=u'1'*(order_of_end_station-order_of_start_station)
             seat.status = ''.join(status_list)
             seat.save()
             od.delete()

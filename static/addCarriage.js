@@ -46,6 +46,7 @@ $(document).ready(function(){
 
             $(row).children().children().children().each(function () {
                 updateElementIndex(this, prefix, formCount);
+                $(this).val("");
                 if ($(this).attr("readonly")=="readonly"){
                     $(this).val(formCount+1);
                 }

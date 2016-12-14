@@ -143,7 +143,7 @@ class Query(object):
                         seatSet = carriage.seat_set.all()
                         seatSet = seatSet.filter(date=TimeSpan(time=startDate))
                         for seat in seatSet:
-                            if seat.status[startOrder-1:endOrder] == "1" *(endOrder-startOrder+1):
+                            if seat.status[startOrder-1:endOrder][:-1] == "1" *(endOrder-startOrder):
                                 type_seat = resultSet.setdefault(train.train_id,{})
                                 seat_result = type_seat.setdefault(seat.carriage.seat_type,[])
                                 seat_result.append(seat)
@@ -393,7 +393,7 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
             #print "seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
             #update the status of start_staion to end_staion-1,the end_station should not be changed
             status_list = list(seat.status)
-            status_list[order_of_start_station-1:order_of_end_station]=u'0'*(order_of_end_station-order_of_start_station+1)
+            status_list[order_of_start_station-1:order_of_end_station-1]=u'0'*(order_of_end_station-order_of_start_station)
             seat.status = ''.join(status_list)
             #print "update seat status: " + str(seat.date.time)+" "+str(seat.carriage.carriage_id)+" "+str(seat.seat_id)+" "+seat.status
             seat.save()
@@ -407,7 +407,7 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
             except Exception, e:
                 print e
                 status_list = list(seat.status)
-                status_list[order_of_start_station-1:order_of_end_station]=u'1'*(order_of_end_station-order_of_start_station+1)
+                status_list[order_of_start_station-1:order_of_end_station-1]=u'1'*(order_of_end_station-order_of_start_station)
                 seat.status = ''.join(status_list)
                 seat.save()
                 response = "单人每车次限购一张票!"
