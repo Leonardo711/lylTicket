@@ -15,45 +15,45 @@
         font-weight:bold;
         color: #fff;
     }
-    #table_title{     
-        width: 55%; 
+    #table_title{
+        width: 55%;
         font-size:18px;
         background-color:#eee;
         margin-top: 25px;
         padding-top: 5px;
         padding-bottom: 5px;
-   
-    } 
+
+    }
     #table_content td{
         text-align: center;
         vertical-align:middle;
     }
-    
 
-    #search_inside{     
+
+    #search_inside{
         text-align:center;
         margin:0 auto;
         height: 100px;
         margin-top: 25px;
-    } 
+    }
 
-    #search_result{     
+    #search_result{
         text-align:center;
         padding-bottom: 0px;
-        width: 55%; 
+        width: 55%;
         padding-left: 0px;
         padding-right: 0px;
-    } 
-    #buy{     
+    }
+    #buy{
         text-align: right;
         margin-bottom: 60px;
-    } 
-    </style>    
+    }
+    </style>
 
-</head>     
+</head>
 <script src="/static/js/jquery-2.0.3.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 {% csrf_token %}
-购票成功！！
-
+<p>{{ response }}</p>
+<a href="/accounts/personinfo" type="button">返回个人中心</a>
 {% endblock %}

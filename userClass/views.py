@@ -22,6 +22,7 @@ from trainManage.models import *
 from ticketQuery.models import *
 from datetime import datetime
 import pytz
+from django.shortcuts import render_to_response
 
 #from ticketQuery.models import Order
 
@@ -382,26 +383,26 @@ class OrderDelete(LoginRequiredMixin,TemplateView):
         order_id = request.POST['order_id']
         print "Post order_id: ",
         print order_id
-        od = Order.objects.get(order_id=order_id)
-        
-        #first to get the start station and end station order (int) from Run table
-        start_station_ID = Station.objects.get(station_name=od.start_station).station_id
-        end_station_ID = Station.objects.get(station_name=od.end_station).station_id
-        print "-------------  Run order_of_station -----------------"
-        Run_start_station = Run.objects.get(train_come_by_id = od.train_name,station_name_id = start_station_ID)
-        order_of_start_station = Run_start_station.order_of_station
-        print Run_start_station.order_of_station
-        Run_end_station = Run.objects.get(train_come_by_id=od.train_name,station_name_id = end_station_ID)
-        order_of_end_station = Run_end_station.order_of_station
-        print Run_end_station.order_of_station
-        print "-------------  Run  order_of_station-----------------"
+        try:
+            od = Order.objects.get(order_id=order_id)
 
-        #recover the seat status
-        seat = od.seat
-        status_list = list(seat.status)
-        status_list[order_of_start_station-1:order_of_end_station]=u'1'*(order_of_end_station-order_of_start_station+1)
-        seat.status = ''.join(status_list)
-        seat.save()
-        od.delete()
+            #first to get the start station and end station order (int) from Run table
+            start_station_ID = Station.objects.get(station_name=od.start_station).station_id
+            end_station_ID = Station.objects.get(station_name=od.end_station).station_id
+            Run_start_station = Run.objects.get(train_come_by_id = od.train_name,station_name_id = start_station_ID)
+            order_of_start_station = Run_start_station.order_of_station
+            Run_end_station = Run.objects.get(train_come_by_id=od.train_name,station_name_id = end_station_ID)
+            order_of_end_station = Run_end_station.order_of_station
 
-        return HttpResponse("退票成功!")
+            #recover the seat status
+            seat = od.seat
+            status_list = list(seat.status)
+            status_list[order_of_start_station-1:order_of_end_station]=u'1'*(order_of_end_station-order_of_start_station+1)
+            seat.status = ''.join(status_list)
+            seat.save()
+            od.delete()
+            response = "退票成功!"
+        except:
+            response ="票信息不存在"
+        return render_to_response('ticketQuery/ticket_order_completed.html', context={'response':response})
+

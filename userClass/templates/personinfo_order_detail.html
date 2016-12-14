@@ -57,12 +57,7 @@
     <script src="/static/js/jquery-2.0.3.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
 
-    距离发车还有{{timeinfo.total_hours}}小时
     <br></br>
-    距离发车还有{{timeinfo.days}}天{{timeinfo.hours}}小时{{timeinfo.minutes}}分钟
-
-
-
     <div class="container" id="table_title">
         <span class="glyphicon glyphicon-th-list">订单信息</span>
     </div>
@@ -81,9 +76,10 @@
         </thead>
         
         <tbody class="item">
+        距离发车还有{{timeinfo.days}}天{{timeinfo.hours}}小时{{timeinfo.minutes}}分钟
                         <tr id="table_content">
                             <td>{{ order.order_id }}</td>
-                            <td>{{ order.order_time }}</td>
+                            <td>{{ order.order_time |date:"Y/m/d H:i"}}</td>
                             <td>{{ order.user_name }} </td> 
                             <td>￥{{ order.pay}} </td>
                             <td>{%ifequal order.order_status 0 %}未发车{%endifequal%}{%ifequal order.order_status 1 %}已完成{%endifequal%}{%ifequal order.order_status 2 %}订单取消{%endifequal%}</td>
@@ -93,7 +89,7 @@
                        
                     </tbody>
         </table>
-      
+
     </div>
 
 

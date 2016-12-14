@@ -132,8 +132,6 @@
                     {% if type_seat.shangwu|length or type_seat.yideng|length or type_seat.erdeng|length or type_seat.ruanwo|length or type_seat.yingwo|length or type_seat.yingzuo|length %}
                         {% if user.is_authenticated %}
                         <td><button type="submit" name="order" class="btn btn-primary btn-lg " style="font-size:16px"> 预订 <span class="glyphicon glyphicon-pushpin"></span></button></td>
-                        {% else %}
-                        <td><button type="button" name="order" class="btn btn-primary btn-lg " style="font-size:16px" onclick="window.location.href='/accounts/login/'"> 预订 <span class="glyphicon glyphicon-pushpin"></span></button></td>
                         {% endif %}
                     {% else %}
                         <td><button type="submit" name="order" class="btn btn-lg " style="font-size:16px" disabled="disabled"> 预订 <span class="glyphicon glyphicon-pushpin"></span></button></td>

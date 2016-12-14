@@ -56,7 +56,7 @@ class ticketQuery(TemplateView):
                                                              resultSet=resultSet,
                                                              ))
 
-class ticketOrder(TemplateView, LoginRequiredMixin):
+class ticketOrder(LoginRequiredMixin,TemplateView):
     template_name = "ticketQuery/ticket_order.html"
     def post(self, request):
         # rebuild the result to a dictionary which store the result
@@ -408,13 +408,12 @@ class ticketOrderCompleted(TemplateView, LoginRequiredMixin):
                 status_list[order_of_start_station-1:order_of_end_station]=u'1'*(order_of_end_station-order_of_start_station+1)
                 seat.status = ''.join(status_list)
                 seat.save()
-                return HttpResponse("单人每车次限购一张票!")
+                response = "单人每车次限购一张票!"
+                return render_to_response('ticketQuery/ticket_order_completed.html', context={'response':response})
+
             else:
                 pass
             finally:
                 pass
-
-            
-
-
-        return HttpResponse("购票成功!")
+        response = "购票成功"
+        return render_to_response('ticketQuery/ticket_order_completed.html', context={'response':response})
