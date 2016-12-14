@@ -3,7 +3,7 @@
 {% block content %}
 <html lang="zh-CN">
 <head>    
-    <title>添加购票人</title>
+    <title>添加乘客</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
@@ -67,7 +67,7 @@
 		{{ item_form.non_form_erros }}
 
 	<div class="container"  id="table_title">
-        <span class="glyphicon glyphicon-user">购票人</span>
+        <span class="glyphicon glyphicon-user">乘客</span>
     </div>
 
     <div class="container" id="search_result">
@@ -78,7 +78,7 @@
 				<th> 乘客姓名 </th>
 				<th> 身份证号码 </th>
 				<th> 学生票 </th>
-				<th> 删除联系人 </th>
+				<th> 备注 </th>
             </tr>
         </thead>
         {% for form in item_form %}
@@ -95,7 +95,7 @@
         </tbody>
         </table>
         <div class="" id="leftbutton"><button type="button" class="btn btn glyphicon glyphicon-chevron-left" style="font-size:16px" onclick="window.location.href='/trainManage/'">返回列表</button>&nbsp&nbsp
-    	<button type="button" id="add" class="btn btn-info glyphicon glyphicon-plus" style="font-size:16px">添加购票人</button></div>   
+    	<button type="button" id="add" class="btn btn-info glyphicon glyphicon-plus" style="font-size:16px">添加乘客</button></div>   
         <div class="" id="rightbutton"><button type="submit" class="btn btn-warning btn-lg" style="font-size:16px" >确认提交<span class="glyphicon glyphicon-ok" ></span></button></div>   
     </div>
 </form>
