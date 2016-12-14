@@ -122,8 +122,7 @@ class Query(object):
             endSet.add(run.train_come_by)
         trainSet = startSet & endSet
         trainStartTime = {}
-        for train in trainSet:
-            print train.train_id
+
         for train in trainSet:
             startRun = Run.objects.get(train_come_by= train, station_name=self.start)
             endRun = Run.objects.get(train_come_by=train, station_name=self.end)
