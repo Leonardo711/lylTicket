@@ -148,7 +148,7 @@ class Query(object):
                                 seat_result = type_seat.setdefault(seat.carriage.seat_type,[])
                                 seat_result.append(seat)
         
-        resultSet = OrderedDict(sorted(resultSet.iteritems(), key=lambda x:x[1]))
+        resultSet = OrderedDict(sorted(resultSet.iteritems(), key=lambda x:x[1]['arrive_time']))
         return resultSet
 
 
