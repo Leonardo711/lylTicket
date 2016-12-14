@@ -8,6 +8,9 @@
     <link href="/static/css/select2.min.css" rel="stylesheet" media="screen">
     <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <style>
+    .table{
+        margin-bottom: 0px;
+    }
     .table th{
         text-align: center;
         background-color: #39f;
@@ -43,10 +46,8 @@
 
     #search_result{
         text-align:center;
-        padding-bottom: 0px;
         width: 80%;
-        margin: 10px auto;
-        margin-bottom: 60px;
+        margin: 10px auto;  
     }
     </style>
 </head>
@@ -79,7 +80,7 @@
         </form>
     </div>
     {% if resultSet %}
-    <div class="container" id="search_result">
+    <div class="" id="search_result">
         <div id="table_title">
             {{date.year}}年{{date.month}}月{{date.day}}日&nbsp&nbsp&nbsp{{ startStation.station_name }} ——> {{ endStation.station_name}}
         </div>
